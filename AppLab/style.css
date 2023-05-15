@@ -1,0 +1,51 @@
+.logo {
+    position: absolute;
+    top: 50%; /* Sposta l'immagine al centro verticalmente */
+    left: 16px; /* Imposta la distanza dal bordo sinistr */
+    transform: translateY(-50%); /* Centra verticalmente */
+    height: 55px; /* Imposta l'altezza */
+}
+
+.dropdown-menu {
+    display: none; /* Nascondi il menu a discesa (default) */
+    position: absolute;
+    background-color: #66b3ff;
+    padding: 0px;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block; /* Mostra il menu a discesa quando il mouse è sopra tutorial */
+}
+
+body {
+    margin: 0; /* Rimuove i margini predefiniti dal body (credo boh) */
+}
+
+header {
+    position: relative; /* Perché si */
+    background-color: #0066cc;
+    padding: 0; /* Rimuove il padding predefinito dall'header (mi fido) */
+    height: 60px
+}
+
+ul.menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #0066cc; /* Imposta il colore dello sfondo dell'header */
+    text-align: right;
+}
+
+ul.menu li {
+    display: inline-block;
+}
+
+ul.menu li a {
+    display: block;
+    padding: 14px 16px;
+    text-align: center;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 22px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
