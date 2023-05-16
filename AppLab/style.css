@@ -3,18 +3,26 @@
     top: 50%; /* Sposta l'immagine al centro verticalmente */
     left: 16px; /* Imposta la distanza dal bordo sinistr */
     transform: translateY(-50%); /* Centra verticalmente */
-    height: 55px; /* Imposta l'altezza */
+    height: 50px; /* Imposta l'altezza (grandezza) */
 }
 
 .dropdown-menu {
-    display: none; /* Nascondi il menu a discesa (default) */
+    display: block; /* Nascondi il menu a discesa (default) */
     position: absolute;
     background-color: #66b3ff;
-    padding: 0px;
+    padding: 10px;
+    list-style-type: none; /* Rimuovi i punti elenco del menu a tendina */
+    visibility: hidden; /* Nascondi il menu a tendina di default */
+    opacity: 0; /* Imposta l'opacità del menu a tendina a 0 di default */
+    max-height: 0; /* Imposta l'altezza massima del menu a tendina a 0 di default */
+    overflow: hidden; /* Nascondi il contenuto in eccesso del menu a tendina */
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, height 0.3s ease-in-out; /* Aggiungi una transizione per l'animazione */
 }
 
 .dropdown:hover .dropdown-menu {
-    display: block; /* Mostra il menu a discesa quando il mouse è sopra tutorial */
+    visibility: visible; /* Mostra il menu a tendina quando il puntatore del mouse è sopra l'elemento dropdown */
+    opacity: 1; /* Imposta l'opacità del menu a tendina a 1 durante l'animazione */
+    max-height: 150px; /* Imposta l'altezza massima desiderata per il menu a tendina */
 }
 
 body {
@@ -25,7 +33,7 @@ header {
     position: relative; /* Perché si */
     background-color: #0066cc;
     padding: 0; /* Rimuove il padding predefinito dall'header (mi fido) */
-    height: 60px
+    height: 50px
 }
 
 ul.menu {
