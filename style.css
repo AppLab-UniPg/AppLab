@@ -9,7 +9,7 @@
 .dropdown-menu {
     display: block; /* Nascondi il menu a discesa (default) */
     position: absolute;
-    background-color: var(--color4);
+    background-color: #26358c;
     padding: 10px;
     list-style-type: none; /* Rimuovi i punti elenco del menu a tendina */
     visibility: hidden; /* Nascondi il menu a tendina di default */
@@ -31,7 +31,7 @@ body {
 
 header {
     position: relative; /* Perché si */
-    background-color: var(--color4);
+    background-color: #26358c;
     padding: 0; /* Rimuove il padding predefinito dall'header (mi fido) */
     height: 50px
 }
@@ -40,7 +40,7 @@ ul.menu {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    background-color: var(--color4); /* Imposta il colore dello sfondo dell'header */
+    background-color: #26358c; /* Imposta il colore dello sfondo dell'header */
     text-align: right;
 }
 
