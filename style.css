@@ -57,3 +57,63 @@ ul.menu li a {
     font-size: 22px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+
+/*SLIDE SHOW*/
+.titolo1 {
+  padding: 3%;
+  text-decoration: none;
+  color: #000000;
+  font-size: 22px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.container{
+  padding: 3%;
+}
+
+.slide-wrapper{
+  position: relative;
+  max-width: 60%;
+  margin: 0%;
+}
+
+.slider {
+  display: flex;
+  aspect-ratio: 16/9;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  /*x tells css to snap to the x axes*/
+  /*mandatori is a sctrictness value that forces the behaviour to snap to the next value*/
+  scroll-behavior: smooth;
+  box-shadow: 0 1.5% 3% -0.75% hsla(0, 0%, 0%, 0.25);
+  border-radius: 0.1%;
+}
+
+.slider img {
+  flex: 1 0 100%;
+  scroll-snap-align: start;
+  object-fit: cover;
+}
+
+.slider-nav {
+  display: flex;
+  column-gap: 5px;
+  position: absolute;
+  bottom: 3%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.slider-nav a {
+  width: 10px;
+  height:10px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  opacity: 0.75;
+  transition: opacity ease 250ms;
+}
+
+.slider-nav a:hover{
+  opacity: 1;
+}
