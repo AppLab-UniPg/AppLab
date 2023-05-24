@@ -160,17 +160,17 @@ div.container-card {
 imag {
   width: 100%;
 }
-h1 {
+h1.h-portfolio {
   font-weight: 600;
   font-size: 36px;
   margin: 0 0 15px;
 }
-p {
+p.p-potfolio {
   font-weight: 300;
   line-height: 24px;
   margin: 0 0 30px 0;
 }
-a {
+a.link-portfolio {
   text-decoration: none;
   text-transform: uppercase;
   color: #FF3434;
