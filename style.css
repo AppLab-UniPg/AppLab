@@ -22,7 +22,7 @@
 .dropdown:hover .dropdown-menu {
     visibility: visible; /* Mostra il menu a tendina quando il puntatore del mouse è sopra l'elemento dropdown */
     opacity: 1; /* Imposta l'opacità del menu a tendina a 1 durante l'animazione */
-    max-height: 150px; /* Imposta l'altezza massima desiderata per il menu a tendina */
+    max-height: 400px; /* Imposta l'altezza massima desiderata per il menu a tendina */
 }
 
 body {
