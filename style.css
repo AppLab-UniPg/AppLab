@@ -143,14 +143,25 @@ div.main-card {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #2AADDE;
+  background-color: white;
   margin:30px;
 }
 div.container-card {
   background-color: white;
+  border:0px;
   border-radius:20px;
   display: flex;
-  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 30px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.45);
+
+}
+div.container-card:hover {
+  background-color: #2AADDE;
+  border:0px;
+  border-radius:20px;
+  display: flex;
   align-items: center;
   justify-content: center;
   margin: 30px;
@@ -158,9 +169,7 @@ div.container-card {
 
 }
 
-imag {
-  width: 100%;
-}
+
 h1.h-portfolio {
   font-weight: 600;
   font-size: 36px;
@@ -184,24 +193,22 @@ a.link-portfolio {
   left: -5px;
 }
 
+
 div.imag-conarg {
-  height: 300px;
-  width: 100%;
   background: url(/img/portfolio/conarg.png);
-  background-position: center;
-  background-size: cover;
+
 }
 div.imag-krabs {
-  height: 300px;
-  width: 100%;
   background: url(/img/portfolio/krabs.png);
-  background-position: center;
-  background-size: cover;
 }
 div.imag-frantoio {
+  background: url(/home/iraton/Desktop/AppLab-UniPg.github.io/img/portfolio/frantoio.png);
+}
+
+div.imag {
   height: 300px;
   width: 100%;
-  background: url(/img/portfolio/frantoio.png);
+  margin-left:1%;
   background-position: center;
   background-size: cover;
 }
