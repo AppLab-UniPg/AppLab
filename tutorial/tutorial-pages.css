@@ -1,7 +1,7 @@
 /* GRID */
 .list {
   display: grid;
-  width: 90%;
+  width: 100%;
   margin: 10vh auto;
   grid-template-columns: repeat(4, auto);
 }
@@ -9,8 +9,8 @@
 
 /* CARD */
 .chapter {
-  width: 20em;
-  height: 10em;
+  width: 22em;
+  height: 12em;
   text-align: center;
   margin: auto;
   margin-bottom: 5em;
@@ -81,13 +81,13 @@
 /* ---------------- */
 
 @media only screen and (max-width: 1600px) {
-  .grid {
+  .list {
     grid-template-columns: auto auto;
   }
 }
 
 @media only screen and (max-width: 800px) {
-  .grid {
+  .list {
     grid-template-columns: auto;
   }
 }
