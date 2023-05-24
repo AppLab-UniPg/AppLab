@@ -133,7 +133,7 @@ span {
   display: inline-block;
   width: 50px;
   height: 5px;
-  background-color: #FF3434;
+  background-color: #C12235;
   margin-bottom: 30px;
 }
 
@@ -149,6 +149,7 @@ div.main-card {
 }
 div.container-card {
   background-color: white;
+  border-radius:20px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -174,7 +175,7 @@ p.p-potfolio {
 a.link-portfolio {
   text-decoration: none;
   text-transform: uppercase;
-  color: #FF3434;
+  color: #C12235;
   font-weight: bold;
   font-size: 14px;
   position: relative;
