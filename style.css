@@ -209,7 +209,9 @@ div.imag-frantoio {
 div.imag {
   height: 300px;
   width: 100%;
-  margin:1%;
+  margin-top:1%;
+  margin-bottom:1%;
+  margin-left:1%;
   background-position: center;
   background-size: cover;
 }
