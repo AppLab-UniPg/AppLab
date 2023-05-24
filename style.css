@@ -206,21 +206,21 @@ a:hover::before {
 div.imag-conarg {
   height: 300px;
   width: 100%;
-  background: url(/home/iraton/Desktop/AppLab-UniPg.github.io/img/portfolio/conarg.png);
+  background: url(/img/portfolio/conarg.png);
   background-position: center;
   background-size: cover;
 }
 div.imag-krabs {
   height: 300px;
   width: 100%;
-  background: url(/home/iraton/Desktop/AppLab-UniPg.github.io/img/portfolio/krabs.png);
+  background: url(/img/portfolio/krabs.png);
   background-position: center;
   background-size: cover;
 }
 div.imag-frantoio {
   height: 300px;
   width: 100%;
-  background: url(/home/iraton/Desktop/AppLab-UniPg.github.io/img/portfolio/frantoio.png);
+  background: url(/img/portfolio/frantoio.png);
   background-position: center;
   background-size: cover;
 }
