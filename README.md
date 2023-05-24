@@ -2,6 +2,7 @@
 <div id="header" align="center">
   <img src="https://applab.dmi.unipg.it/images/logonuovo.png" width="100"/>
 </div>
+
 ## Cos'è AppLab
 Applab è un gruppo di studenti di Informatica dell’Università di Perugia che lavora alla programmazione Web rispettando gli ultimi standard W3C (HTML5, CSS3, Javascript).
 
