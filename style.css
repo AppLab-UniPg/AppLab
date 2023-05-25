@@ -164,14 +164,7 @@ div.container-card {
 }
 div.container-card:hover {
   background-color: #2AADDE;
-  border:0px;
-  border-radius:20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 30px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.45);
-
+  transform:scale(1.1);
 }
 
 
