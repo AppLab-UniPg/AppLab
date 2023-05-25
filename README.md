@@ -13,3 +13,17 @@ L’obbiettivo è di creare siti Web responsive facilmente convertibili in App.
 Durante gli incontri settimanali a turno alcuni studenti preparano dei tutorial sugli argomenti riguardanti il design di un sito web. Solitamente se ci sono vengono pubblicati
 anche.
 Il nostro lavoro si basa nella creazione senza avvalersi di framework per la crazione di siti.
+
+## Come avviare il sito in locale
+Eseguire questo comando:
+`
+sudo docker-compose up -d
+`
+Per vedere il log:
+`
+sudo docker-compose logs --follow
+`
+Per stopparlo:
+`
+sudo docker-compose down
+`
