@@ -1,77 +1,76 @@
 :root {
-  --nav-height: 10vh;
+  --nav-height: 15vh;
 }
 
 body {
-  margin: 0; /* Rimuove i margini predefiniti dal body (credo boh) */
-  margin-top: var(--nav-height); /* Spazio per la navbar */
-  /* TODO: font-family: */
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Navbar */
 nav {
   height: var(--nav-height);
   width: 100%;
-  position: fixed;
-  top: 0;
-  background-color: #26358c;
   z-index: 1;
 }
 
-a {
-  color: #ffffff;
-  font-size: 1.5rem;
-  text-decoration: none;
-}
-
-.logo {
-  position: absolute;
-  left: 1vw; /* Imposta la distanza dal bordo sinistro */
-  top: 5%; /* Sposta l'immagine al centro verticalmente */
-  height: 90%; /* Adatta l'immagine al container */
-}
-
-.menu {
-  margin: 0;
-  padding: 0;
-  text-align: right;
-}
-
-.sezione {
-  width: 10vw;
-  height: var(--nav-height);
-  line-height: var(--nav-height);
-  display: inline-block;
-  text-align: center;
-}
-
-.sezione:hover .nav-voce {
-  color: #2AADDE;
-  line-height: calc(var(--nav-height) - 1vh); /* Se non c'è questa proprietà, gli altri elementi scendono */
-}
-
-.dropdown-menu {
-  visibility: hidden; /* Nascondi il menu a tendina di default */
-  opacity: 0; /* Imposta l'opacità del menu a tendina a 0 di default */
-  transition: opacity 0.3s, visibility 0.3s; /* Aggiungi una transizione per l'animazione */
+.topnav {
+  overflow: hidden;
   background-color: #26358c;
-  width: 10vw;
-  line-height: 4rem;
-  position: absolute;
-  top: var(--nav-height); 
-  max-height: 100vh; /* L'altezza massima può essere quanto vogliamo */
 }
 
-.dropdown:hover .dropdown-menu {
-  visibility: visible; /* Mostra il menu a tendina quando il puntatore del mouse è sopra l'elemento dropdown */
-  opacity: 1; /* Animazione fluida */
+.topnav a {
+  float: right;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
 }
 
-.dropdown-menu a:hover {
-  text-decoration: underline;
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #919bd1;
+  color: white;
+}
+
+.topnav .icon {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .topnav a {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .topnav.responsive {position: relative;}
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}
+
+.logo{
+  height: 7vh;
+  float: left;
 }
 
 /*SLIDE SHOW*/
-
 .titolo1 {
   padding: 3%;
   text-decoration: none;
@@ -86,9 +85,9 @@ a {
 }
 
 .slide-wrapper{
-  position: absolute;
   max-width: 60%;
   margin: 0%;
+  z-index: 0;
 }
 
 .slider {
@@ -248,9 +247,5 @@ div.imag {
 @media scree and (max-width: 1366px){
   .sezione {
     width: 12vw;
-    height: var(--nav-height);
-    line-height: var(--nav-height);
-    display: inline-block;
-    text-align: center;
   }
-}
+} 

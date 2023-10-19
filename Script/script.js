@@ -12,4 +12,13 @@ document.addEventListener("DOMContentLoaded", function () {
         console.warn("Errore nel caricamento della navbar:", error);
       });
   }
-});
+})
+
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
