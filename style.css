@@ -9,7 +9,6 @@ body {
 
 /* Navbar */
 nav {
-  height: var(--nav-height);
   width: 100%;
   position: fixed;
   top: 0;
