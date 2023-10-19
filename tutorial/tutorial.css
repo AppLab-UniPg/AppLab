@@ -9,43 +9,49 @@
 
 /* CARD */
 .card {
-  max-width: 346px;
-  max-height: 28em;
-  text-align: center;
+  width: 346px;
+  height: 28em;
+  position: relative;
   margin: 0 auto;
   border: 3px solid black;
   border-radius: 30px;
   box-shadow: 10px 10px 10px gray;
   overflow: hidden;
   cursor: pointer;
-  transition: max-height 0.5s;
-}
-
-.card:hover {
-  max-height: 50em;
 }
 /* ---------------- */
 
 /* IMMAGINE */
 .icon {
+  position: absolute;
   border-radius: 25px 25px 0 0;
+  transition: filter 0.5s;
+}
+
+.card:hover .icon {
+  filter: blur(2px) brightness(50%);
 }
 /* ---------------- */
 
 /* TESTO PICCOLO */
 .didascalia {
   font-family: sans-serif;
-  max-height: 0;
+  font-size: 1.5em;
+  position: absolute;
+  color: white;
+  text-align: center;
+  padding: 0 5%;
   opacity: 0;
   margin: 0;
   overflow: hidden;
-  transition: max-height 0.5s, opacity 0.5s;
+  z-index: 10;
+  transition: padding 0.5s, opacity 0.5s;
 }
 
 .card:hover .didascalia {
-  max-height: 20vh;
   opacity: 1;
-  transition: max-height 1s, opacity 0.5s;
+  padding: 20% 5%;
+  transition: padding 0.5s, opacity 0.5s;
 }
 /* ---------------- */
 
@@ -53,7 +59,8 @@
 .titolo {
   font-size: 1.5em;
   font-family: sans-serif;
-  margin: 0;
+  text-align: center;
+  margin: 406px 0 0 0;
   padding: 5px;
   border-top: 3px solid black;
 }
