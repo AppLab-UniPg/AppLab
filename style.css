@@ -48,15 +48,17 @@ nav {
   display: none;
 }
 
+.logo{
+  height: var(--nav-height);
+  float: left;
+}
+
 @media screen and (max-width: 600px) {
   .topnav a {display: none;}
   .topnav a.icon {
     float: right;
     display: block;
   }
-}
-
-@media screen and (max-width: 600px) {
   .topnav.responsive {position: relative;}
   .topnav.responsive .icon {
     position: absolute;
@@ -68,11 +70,9 @@ nav {
     display: block;
     text-align: left;
   }
-}
-
-.logo{
-  height: var(--nav-height);
-  float: left;
+  .logo{
+    margin-left: 40Vw;
+  }
 }
 
 /*SLIDE SHOW*/
