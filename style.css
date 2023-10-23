@@ -1,5 +1,5 @@
 :root {
-  --nav-height: 15vh;
+  --nav-height: 10vh;
 }
 
 body {
@@ -10,7 +10,7 @@ body {
 /* Navbar */
 nav {
   width: 100%;
-  position: fixed;
+  position: static;
   top: 0;
   background-color: #26358c;
   z-index: 1;
@@ -26,9 +26,12 @@ nav {
   display: block;
   color: #f2f2f2;
   text-align: center;
-  padding: 14px 16px;
+  height: var(--nav-height);
+  padding-right: 16px;
+  padding-left: 16px;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 3vh;
+  line-height: var(--nav-height);
 }
 
 .topnav a:hover {
@@ -68,7 +71,7 @@ nav {
 }
 
 .logo{
-  height: 7vh;
+  height: var(--nav-height);
   float: left;
 }
 
@@ -160,6 +163,7 @@ div.main-card {
   justify-content: center;
   background-color: white;
   margin:30px;
+  margin-top: var(--nav-height);
 }
 div.container-card {
   background-color: white;
