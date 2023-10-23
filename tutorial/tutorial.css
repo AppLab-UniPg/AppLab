@@ -22,13 +22,13 @@
 /* ---------------- */
 
 /* IMMAGINE */
-.icon {
+.book_cover {
   position: absolute;
   border-radius: 25px 25px 0 0;
   transition: filter 0.5s;
 }
 
-.card:hover .icon {
+.card:hover .book_cover {
   filter: blur(2px) brightness(50%);
 }
 /* ---------------- */
