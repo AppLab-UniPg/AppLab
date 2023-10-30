@@ -5,6 +5,8 @@
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
+  position: relative;
+  min-height: 70vh;
 }
 
 /* Footer */
@@ -13,8 +15,8 @@ footer {
   background-color: #293133;
   color: white;
   padding: 1% 15% 2%;
-  position: relative;
-  bottom: 0;
+  position: absolute;
+  bottom: -30vh;
   width: 100vw;
   /*padding: 2% 15% 4%;*/
 }
