@@ -18,6 +18,7 @@ footer {
   position: absolute;
   bottom: -30vh;
   width: 100vw;
+  max-width:100%;
   /*padding: 2% 15% 4%;*/
 }
 
