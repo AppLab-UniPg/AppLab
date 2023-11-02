@@ -89,6 +89,7 @@
   @media only screen and (max-width: 1200px) {
     .grid {
       grid-template-columns: auto;
+      margin: 5vh 2.5vw 0 2.5vw;
     }
     .card{
       width: 90vw;
