@@ -1,17 +1,16 @@
 /* GRID */
 .grid {
     display: grid;
-    width: 90%;
-    grid-gap: 5em;
-    max-width: 100vw;
-    margin: 20vh auto 0 auto;
+    width: 95vw;
+    grid-gap: 2.5vw;
+    margin: 20vh 2.5vw 0 2.5vw;
     grid-template-columns: repeat(3, auto);
   }
   /* ---------------- */
   
   /* CARD */
   .card {
-    width: 40vw;
+    width: 30vw;
     height: 28em;
     position: relative;
     margin: 0 auto;
@@ -27,7 +26,7 @@
   .book_cover {
     top:0;
     height: 406px;
-    width: 40vw;
+    width: 30vw;
     position: absolute;
     border-radius: 25px 25px 0 0;
     transition: filter 0.5s;
