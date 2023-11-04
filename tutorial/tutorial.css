@@ -2,7 +2,7 @@
 .grid {
   display: grid;
   width: 90%;
-  margin: 20vh auto 0 auto;
+  margin: 20vh auto 20vh auto;
   grid-template-columns: repeat(4, auto);
 }
 /* ---------------- */
@@ -81,8 +81,9 @@
   }
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1300px) {
   .grid {
     grid-template-columns: auto;
+    margin: 5vh auto 5vh auto;
   }
 }

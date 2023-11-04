@@ -6,7 +6,6 @@ body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   position: relative;
-  min-height: 70vh;
 }
 
 /* Footer */
@@ -16,7 +15,8 @@ footer {
   color: white;
   padding: 1% 15% 2%;
   position: absolute;
-  bottom: -30vh;
+  /* Footer at botton in the homepage
+  bottom: -30vh;*/
   width: 100vw;
   max-width:100%;
   /*padding: 2% 15% 4%;*/
