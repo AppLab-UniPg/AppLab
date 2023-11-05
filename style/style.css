@@ -165,6 +165,7 @@ nav {
   max-width: 60vw;
 }
 .mySlides img{
+  width: 60vw;
   border-radius: 30px;
 }
 .numbertext {

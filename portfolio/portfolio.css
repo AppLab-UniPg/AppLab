@@ -86,7 +86,7 @@
     }
   }
   
-  @media only screen and (max-width: 1200px) {
+  @media only screen and (max-width: 1080px) {
     .grid {
       grid-template-columns: auto;
       margin: 5vh 2.5vw 5vh 2.5vw;
