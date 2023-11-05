@@ -56,3 +56,11 @@ function plusSlides(n) {
   }
   slides[slideIndex - 1].style.display = "block";
 }
+
+timeout();
+function timeout() {
+  setTimeout(function () {
+      plusSlides(1);
+      timeout();
+  }, 5000);
+}
