@@ -1,9 +1,11 @@
 /* GRID */
 .list {
   display: grid;
-  width: 100%;
-  margin: 15vh auto;
-  grid-template-columns: repeat(4, auto);
+  width: 100vw;
+  margin: 10vh auto;
+  text-align: center;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, 30em);
 }
 /* ---------------- */
 
@@ -11,9 +13,7 @@
 .chapter {
   width: 22em;
   height: 12em;
-  text-align: center;
-  margin: auto;
-  margin-bottom: 5em;
+  margin: auto auto 5em;
   border: 3px solid black;
   border-radius: 30px;
   overflow: hidden;
@@ -79,15 +79,3 @@
   transition: opacity 0.1s;
 }
 /* ---------------- */
-
-@media only screen and (max-width: 1600px) {
-  .list {
-    grid-template-columns: auto auto;
-  }
-}
-
-@media only screen and (max-width: 800px) {
-  .list {
-    grid-template-columns: auto;
-  }
-}
