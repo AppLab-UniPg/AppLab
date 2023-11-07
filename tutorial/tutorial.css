@@ -3,6 +3,7 @@
   display: grid;
   width: 90%;
   margin: 10vh auto;
+  min-height: 55vh;
   grid-template-columns: repeat(4, auto);
 }
 /* ---------------- */

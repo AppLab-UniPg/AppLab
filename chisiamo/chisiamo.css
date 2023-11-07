@@ -1,7 +1,8 @@
 .profile-grid {
     display: grid;
     grid-gap: 2.5vw;
-    margin: 20vh 2.5vw 20vh 2.5vw;
+    margin: 10vh 2.5vw 10vh 2.5vw;
+    min-height: 55vh;
     grid-template-columns: repeat(6, auto);
 }
 
