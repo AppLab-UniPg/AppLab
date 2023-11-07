@@ -1,0 +1,81 @@
+.profile-grid {
+    display: grid;
+    grid-gap: 2.5vw;
+    margin: 20vh 2.5vw 20vh 2.5vw;
+    grid-template-columns: repeat(6, auto);
+}
+
+.card {
+    background-color: var(--color-blu);
+    position: relative;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 14vw;
+    margin: auto;
+    text-align: center;
+    border-radius: 30px;
+}
+
+.card img {
+    width: 14vw;
+    border-radius: 30px;
+}
+
+button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: var(--color-gray);
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+    border-radius: 100px;
+}
+
+a {
+    text-decoration: none;
+    font-size: 22px;
+    color: white;
+}
+
+button:hover,
+a:hover {
+    opacity: 0.7;
+}
+
+.title {
+    color: var(--color-red);
+    font-size: 18px;
+}
+
+@media only screen and (max-width: 1600px) {
+    .profile-grid {
+        display: grid;
+        margin: 10vh 2.5vw 10vh 2.5vw;
+        grid-template-columns: repeat(3, auto);
+    }
+    .card {
+        width: 22vw;
+    }
+
+    .card img {
+        width: 22vw;
+    }
+}
+
+@media only screen and (max-width: 1080px) {
+    .profile-grid {
+        margin: 10vh 2.5vw 10vh 2.5vw;
+        grid-template-columns: repeat(2, auto);
+    }
+
+    .card {
+        width: 45vw;
+    }
+
+    .card img {
+        width: 45vw;
+    }
+}

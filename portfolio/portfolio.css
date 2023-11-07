@@ -69,7 +69,7 @@
   }
   
   .card:hover .titolo {
-    background-color: #26358c;
+    background-color: var(--color-blu);
     color: white;
   }
   /* ---------------- */
