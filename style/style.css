@@ -221,7 +221,7 @@ nav {
   }
 
   .mySlides img {
-    max-height: 60vh;
+    width: 96vw;
     max-width: 96vw;
     border-radius: 30px;
   }
