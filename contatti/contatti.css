@@ -1,0 +1,49 @@
+.body {
+  min-height: calc(90vh - var(--nav-height) - var(--footer-height));
+}
+
+.contatti-form {
+  width: 40vw;
+  margin: 10vh auto;
+  padding: 2em;
+  background-color: lavender;
+  border-radius: 30px;
+}
+
+.titolo {
+  text-align: center;
+  font-size: 2.5em;
+}
+
+.contatti-input {
+  width: 100%;
+  padding: 1em;
+  font-size: 1.25em;
+  border-bottom: 2px solid var(--color-blu);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+textarea {
+  height: 12vh;
+  font-family: sans-serif;
+  resize: vertical;
+}
+
+.contatti-invia {
+  width: 100%;
+  background-color: var(--color-blu);
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 2em;
+  font-weight: 600;
+  padding: .75em;
+  transition: .5s ease;
+}
+
+.contatti-invia:hover {
+  filter: brightness(130%);
+  transition: .5s ease;
+}
