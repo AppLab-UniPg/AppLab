@@ -47,3 +47,9 @@ textarea {
   filter: brightness(130%);
   transition: .5s ease;
 }
+
+@media screen and (max-width: 1080px) {
+  .contatti-form {
+    width: 90vw;
+  }
+}
