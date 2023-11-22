@@ -1,8 +1,8 @@
 :root {
   --nav-height: 10vh;
   --footer-height: 15vh;
-  --color-blu: #27348B;
-  --color-red: #8E1116;
+  --color-blu: #27348b;
+  --color-red: #C12235;
   --color-gray: #293133;
   --color-white: #fff;
 }
@@ -132,6 +132,9 @@ nav {
 .news {
   grid-area: news;
   width: 35vw;
+  overflow: scroll;
+  max-height: 150vh;
+  border-radius: 30px;
 }
 
 .map {
@@ -149,7 +152,7 @@ nav {
   grid-template-areas:
     'slideshow news'
     'map  news';
-  background-color: #2196F3;
+  /*background-color: #2196F3;*/
   max-width: 100%;
   min-height: 75vh;
   gap: 1vw;
@@ -188,11 +191,24 @@ nav {
   position: absolute;
   top: 0;
 }
+
+/* Map */
+
 #map_dmi{
   width: 60vw;
-  height: 30vh;
+  height: 100%;
   border: none;
   border-radius: 1em;
+}
+
+/* Notizie*/
+.notizia{
+  width: 35vw;
+  word-wrap: break-word;
+  border-radius: 30px;
+  background-color: var(--color-red);
+  margin-top: 10px;
+  padding: 10px;
 }
 
 @media screen and (max-width: 1080px) {
@@ -206,6 +222,15 @@ nav {
   .news {
     width: 96vw;
     min-height: 30vh;
+    max-height: none;
+    overflow:visible;
+  }
+  .notizia{
+    width: 96vw;
+    word-wrap: break-word;
+    border-radius: 30px;
+    background-color: var(--color-red);
+    margin-top: 10px;
   }
 
   .map {
