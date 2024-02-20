@@ -2,7 +2,7 @@
   min-height: calc(90vh - var(--nav-height) - var(--footer-height));
 }
 
-.contatti-form {
+.accesso-form {
   width: 40vw;
   margin: 10vh auto;
   padding: 2em;
@@ -15,7 +15,7 @@
   font-size: 2.5em;
 }
 
-.contatti-input {
+.accesso-input {
   width: 100%;
   padding: 1em;
   font-size: 1.25em;
@@ -31,7 +31,7 @@ textarea {
   resize: vertical;
 }
 
-.contatti-invia {
+.accesso-invia {
   width: 100%;
   background-color: var(--color-blu);
   border: none;
@@ -43,13 +43,13 @@ textarea {
   transition: .5s ease;
 }
 
-.contatti-invia:hover {
+.accesso-invia:hover {
   filter: brightness(130%);
   transition: .5s ease;
 }
 
 @media screen and (max-width: 1080px) {
-  .contatti-form {
+  .accesso-form {
     width: 90vw;
   }
 }
