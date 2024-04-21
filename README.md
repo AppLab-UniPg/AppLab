@@ -1,6 +1,6 @@
 # AppLab
 <div id="header" align="center">
-  <img src="/img/logo_128p.webp" width="100"/>
+  <img src="/client/img/logo_128p.webp" width="100"/>
 </div>
 
 ## Cos'è AppLab
