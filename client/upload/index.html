@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>AppLab</title>
+        <link rel="stylesheet" type="text/css" href="/style/style.css">
+        <script rel="script" src="/Script/script.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- google icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      </head>
+<body>
+    <div id="navbar"></div>
+    <h1>Upload Page</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required><br><br>
+        
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea><br><br>
+        
+        <label for="presentation">Presentation:</label>
+        <input type="file" id="presentation" name="presentation" accept=".ppt, .pptx, .pdf" required webkitdirectory><br><br>
+        
+        <label for="exercise">Exercise:</label>
+        <input type="file" id="exercise" name="exercise" accept=".pdf" required webkitdirectory><br><br>
+        
+        <label for="token">Secret Token:</label>
+        <input type="password" id="token" name="token" required><br><br>
+        
+        <input type="submit" value="Upload">
+    </form>
+    <div id="footer"></div>
+</body>
+</html>
