@@ -23,3 +23,6 @@ Per vedere il log:
 
 Per stopparlo:
 `sudo docker-compose down`
+
+Secret-Key:
+`{}64O#@vX^q)KF;o<QrSb"c//w#W>A`
