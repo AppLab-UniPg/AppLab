@@ -11,7 +11,7 @@
       </head>
 <body>
     <div id="navbar"></div>
-    <h1>Upload Page</h1>
+    <h1>Crea un nuovo tutorial</h1>
     <form action="/upload" method="post" enctype="multipart/form-data">
         <label for="title">Title:</label>
         <input type="text" id="title" name="title" required><br><br>
@@ -19,11 +19,29 @@
         <label for="description">Description:</label>
         <textarea id="description" name="description" required></textarea><br><br>
         
+        <input type="submit" value="Create">
+    </form>
+
+    <h1>Carica in un tutorial</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="tutorial">Choose a tutorial:</label>
+        <select id="tutorial" name="tutorial" required>
+            <option value="tutorial1">Tutorial 1</option>
+            <option value="tutorial2">Tutorial 2</option>
+            <option value="tutorial3">Tutorial 3</option>
+        </select><br><br>
+        
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required><br><br>
+        
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea><br><br>
+
         <label for="presentation">Presentation:</label>
         <input type="file" id="presentation" name="presentation" accept=".ppt, .pptx, .pdf" required webkitdirectory><br><br>
         
         <label for="exercise">Exercise:</label>
-        <input type="file" id="exercise" name="exercise" accept=".pdf" required webkitdirectory><br><br>
+        <input type="file" id="exercise" name="exercise" accept=".zip" required webkitdirectory><br><br>
         
         <label for="token">Secret Token:</label>
         <input type="password" id="token" name="token" required><br><br>
