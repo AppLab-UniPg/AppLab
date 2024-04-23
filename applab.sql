@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: Apr 23, 2024 at 01:56 PM
+-- Generation Time: Apr 23, 2024 at 02:26 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.0.24
 
@@ -20,6 +20,23 @@ SET time_zone = "+00:00";
 --
 -- Database: `applab`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `secret-key`
+--
+
+CREATE TABLE `secret-key` (
+  `secret` varchar(400) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `secret-key`
+--
+
+INSERT INTO `secret-key` (`secret`) VALUES
+('5f3933533b98a0fd31e677a9f5feb853e921690f8190159526043228d29e04f5');
 
 -- --------------------------------------------------------
 
