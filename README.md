@@ -24,5 +24,13 @@ Per vedere il log:
 Per stopparlo:
 `sudo docker-compose down`
 
+## Caricare DB
+Aprire phpmyadmin e fare un import del file applab.sql
+
+## Secret key upload page
+Per caricare i tutorial c'è bisogno di una chiave, giusto per fare un minimo di sicurezza.
+
 Secret-Key:
 `{}64O#@vX^q)KF;o<QrSb"c//w#W>A`
+
+La chiave è salvata nel database tramite sha256
