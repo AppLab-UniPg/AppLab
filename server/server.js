@@ -4,6 +4,8 @@ let io = require('socket.io')(http);
 let mysql = require('mysql');
 let db = require('./db.js'); //dati database in un'altro file
 let con;
+
+io.sockets.on('connection', function (socket) { //quando un client si connette
     //mi connetto al database
     con = mysql.createConnection({
         host: db.host,
@@ -16,8 +18,6 @@ let con;
         if (err) throw err;
         console.log("Connected to the database!");
     });
-io.sockets.on('connection', function (socket) { //quando un client si connette
-
 
     socket.on('receive-tutorial', function (dati) { //quando ricevo la richiesta di un tutorial invio i dati
 
