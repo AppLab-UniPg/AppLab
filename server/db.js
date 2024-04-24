@@ -1,7 +1,7 @@
 let host = "db";
 let database = "applab";
 let user = "root";
-let password = "notSecureChangeMe";
+let password = "root";
 
 exports.host = host;
 exports.database = database;
