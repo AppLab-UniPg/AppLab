@@ -19,11 +19,28 @@ io.sockets.on('connection', function (socket) { //quando un client si connette
         console.log("Connected to the database!");
     });
 
-    socket.on('receive-tutorial', function (dati) { //quando ricevo la richiesta di un tutorial invio i dati
-
+    socket.on('receive-tutorial', function () { //quando ricevo la richiesta di un tutorial invio i dati
+        con.connect(function (err) {
+            if (err) throw err;
+            con.query("SELECT * FROM tutorial", function (err, result, fields) {
+                if (err) throw err;
+                let tutorials=JSON.parse(JSON.stringify(result));
+                socket.emit('send-tutorial', {tutorials: tutorials});   //invio i dati al client
+                console.log(tutorials);
+            });
+        });
     });
 
     socket.on('receive-subtutorial', function (dati) { //quando ricevo la richiesta di un subtutorial invio i dati
+        con.connect(function (err) {
+            if (err) throw err;
+            con.query("SELECT * FROM subtutorial where tutorial=?",[dati.tutorial], function (err, result, fields) {
+                if (err) throw err;
+                let tutorials=JSON.parse(JSON.stringify(result));
+                socket.emit('send-subtutorial', {tutorials: tutorials});   //invio i dati al client
+                console.log(tutorials);
+            });
+        });
     });
 
     socket.on('receive-list-tutorial', function () { //quando ricevo la richiesta della lista dei tutorial invio i dati
@@ -32,8 +49,8 @@ io.sockets.on('connection', function (socket) { //quando un client si connette
             con.query("SELECT Titolo FROM tutorial", function (err, result, fields) {
                 if (err) throw err;
                 let tutorials=JSON.parse(JSON.stringify(result));
-                socket.emit('list-tutorial', {tutorials: tutorials});
-                console.log(data);
+                socket.emit('send-list-tutorial', {tutorials: tutorials});
+                console.log(tutorials);
             });
         });
     });
