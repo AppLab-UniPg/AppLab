@@ -27,6 +27,21 @@ io.sockets.on('connection', function (socket) { //quando un client si connette
     });
 
     socket.on('receive-list-tutorial', function () { //quando ricevo la richiesta della lista dei tutorial invio i dati
+        con.connect(function (err) {
+            if (err) throw err;
+            con.query("SELECT Titolo FROM tutorial", function (err, result, fields) {
+                if (err) throw err;
+                let tutorials=JSON.parse(JSON.stringify(result));
+                socket.emit('list-tutorial', {tutorials: tutorials});
+                console.log(data);
+            });
+        });
+    });
+
+    socket.on('add-tutorial', function () { //quando ricevo la richiesta di aggiungere un turoria
+    });
+
+    socket.on('add-subtutorial', function () { //quando ricevo la richiesta di aggiungere un subtutorial
     });
 
 });
