@@ -1,13 +1,18 @@
-version: "3.8"
-
 services:
 
     web:
         image: nginx:latest
         volumes:
-            - ./client:/usr/share/nginx/html
+            - ./client:/var/www/html
+            - ./default.conf:/etc/nginx/conf.d/default.conf
+        links:
+            - php-fpm
         ports:
             - "80:80"
+    php-fpm:
+        image: php:8-fpm
+        volumes:
+            - ./client:/var/www/html
     db:
         image: mysql:latest # use latest version of mysql
         container_name: db # add a name for the container
