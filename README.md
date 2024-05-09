@@ -25,7 +25,8 @@ Per stopparlo:
 `sudo docker-compose down`
 
 ## Caricare DB
-Aprire phpmyadmin e fare un import del file applab.sql
+Aprire phpmyadmin e  creare un database `applab`
+Fare un import del file `applab.sql`
 
 ## Secret key upload page
 Per caricare i tutorial c'è bisogno di una chiave, giusto per fare un minimo di sicurezza.

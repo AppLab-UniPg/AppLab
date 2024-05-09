@@ -43,16 +43,21 @@ footer a:hover {
 
 /* Navbar */
 nav {
-  width: 100%;
   position: static;
   top: 0;
   background-color: var(--color-blu);
+  margin-left: 2vw;
+  margin-right: 2vw;
+  border-radius: 30px;
+  margin-top: 2vw;
+  padding: 10px;
   z-index: 1;
 }
 
 .topnav {
   overflow: hidden;
   background-color: var(--color-blu);
+  border-radius: 30px;
 }
 
 .topnav a {
