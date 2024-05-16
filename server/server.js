@@ -2,13 +2,12 @@ let app = require('express')();
 let http = require('http').Server(app);
 let io = require('socket.io')(http);
 const bodyParser = require('body-parser');
-const path = require("path");
+const fs = require('fs');
+const path = require('path');
 const multer = require("multer");
 let mysql = require('mysql');
 let db = require('./db.js'); //dati database in un'altro file
 let con;
-
-app.use(bodyParser.urlencoded({ extended: false }));
 
 io.sockets.on('connection', function (socket) { //quando un client si connette
     //mi connetto al database
@@ -60,72 +59,43 @@ io.sockets.on('connection', function (socket) { //quando un client si connette
         });
     });
 
-    socket.on('add-tutorial', function () { //quando ricevo la richiesta di aggiungere un turoria
-    });
-
-    socket.on('add-subtutorial', function () { //quando ricevo la richiesta di aggiungere un subtutorial
-    });
-
 });
 
 //Create new tutorial
+// for parsing multipart/form-data
+app.use(multer().any());
+
 app.post('/addtutorial', (req, res) => {
-    console.log('Title:', req.body.title);
-    console.log('Description:', req.body.description);
+
+    console.log('body:', req.body);
 });
 
 
 //Upload file
 
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        // Uploads is the Upload_folder_name
-        cb(null, "/var/www/html/upload/file");
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.originalname);
-    },
-});
-
-const upload = multer({
-    storage: storage,
-    // Limit file size if needed
-    limits: { fileSize: 1024 * 1024 * 10 }, // 10 MB
-    // Filter files
-    fileFilter: function (req, file, cb) {
-        // Check file type
-        const allowedExtensions = ['.zip', '.pdf', '.ppt', '.pptx'];
-        const extname = path.extname(file.originalname).toLowerCase();
-        if (allowedExtensions.includes(extname)) {
-            cb(null, true);
-        } else {
-            cb(new Error('Invalid file extension!'), false);
-        }
-    }
-});
-
 app.post('/upload', (req, res) => {
-    upload.fields([
-        { name: 'presentation', maxCount: 1 },
-        { name: 'exercise', maxCount: 1 }])(req, res, function (err) {
+
+    console.log('Title:', req.body.title);
+    console.log('Description:', req.body.description);
+    console.log('Token:', req.body.token);
+    console.log('Tutorial:', req.body.tutorial);
+    console.log('Files:', req.files);
+
+    // Save each file to a specified directory
+    req.files.forEach(file => {
+        const destinationDir = '/var/www/html/upload/file'; // Specify your destination directory here
+        const filePath = path.join(destinationDir, file.originalname);
+
+        // Save the file
+        fs.writeFile(filePath, file.buffer, (err) => {
             if (err) {
-                next(err);
-                return;
+                console.error('Error saving file:', err);
+            } else {
+                console.log('File saved successfully:', file.originalname);
             }
-
-            const presentationFile = req.files['presentation'] ? req.files['presentation'][0] : null;
-            const exerciseFile = req.files['exercise'] ? req.files['exercise'][0] : null;
-
-
-            if (presentationFile) console.log('PDF/PPT/PPTX file:', presentationFile.originalname);
-            if (exerciseFile) console.log('ZIP file:', exerciseFile.originalname);
-
-            console.log('Description:', req.body.description);
-            console.log('Title:', req.body.title);
-            console.log('Tutorial:', req.body.tutorial);
-
-            res.send('Files uploaded successfully!');
         });
+    });
+    res.send('Files uploaded successfully!');
 });
 
 
