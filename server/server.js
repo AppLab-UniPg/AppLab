@@ -1,11 +1,14 @@
 let app = require('express')();
 let http = require('http').Server(app);
 let io = require('socket.io')(http);
+const bodyParser = require('body-parser');
 const path = require("path");
 const multer = require("multer");
 let mysql = require('mysql');
 let db = require('./db.js'); //dati database in un'altro file
 let con;
+
+app.use(bodyParser.urlencoded({ extended: false }));
 
 io.sockets.on('connection', function (socket) { //quando un client si connette
     //mi connetto al database
@@ -26,8 +29,8 @@ io.sockets.on('connection', function (socket) { //quando un client si connette
             if (err) throw err;
             con.query("SELECT * FROM tutorial", function (err, result, fields) {
                 if (err) throw err;
-                let tutorials=JSON.parse(JSON.stringify(result));
-                socket.emit('send-tutorial', {tutorials: tutorials});   //invio i dati al client
+                let tutorials = JSON.parse(JSON.stringify(result));
+                socket.emit('send-tutorial', { tutorials: tutorials });   //invio i dati al client
                 console.log(tutorials);
             });
         });
@@ -36,10 +39,10 @@ io.sockets.on('connection', function (socket) { //quando un client si connette
     socket.on('receive-subtutorial', function (dati) { //quando ricevo la richiesta di un subtutorial invio i dati
         con.connect(function (err) {
             if (err) throw err;
-            con.query("SELECT * FROM subtutorial where tutorial=?",[dati.tutorial], function (err, result, fields) {
+            con.query("SELECT * FROM subtutorial where tutorial=?", [dati.tutorial], function (err, result, fields) {
                 if (err) throw err;
-                let tutorials=JSON.parse(JSON.stringify(result));
-                socket.emit('send-subtutorial', {tutorials: tutorials});   //invio i dati al client
+                let tutorials = JSON.parse(JSON.stringify(result));
+                socket.emit('send-subtutorial', { tutorials: tutorials });   //invio i dati al client
                 console.log(tutorials);
             });
         });
@@ -50,8 +53,8 @@ io.sockets.on('connection', function (socket) { //quando un client si connette
             if (err) throw err;
             con.query("SELECT Titolo FROM tutorial", function (err, result, fields) {
                 if (err) throw err;
-                let tutorials=JSON.parse(JSON.stringify(result));
-                socket.emit('send-list-tutorial', {tutorials: tutorials});
+                let tutorials = JSON.parse(JSON.stringify(result));
+                socket.emit('send-list-tutorial', { tutorials: tutorials });
                 console.log(tutorials);
             });
         });
@@ -65,18 +68,15 @@ io.sockets.on('connection', function (socket) { //quando un client si connette
 
 });
 
+//Create new tutorial
+app.post('/addtutorial', (req, res) => {
+    console.log('Title:', req.body.title);
+    console.log('Description:', req.body.description);
+});
 
 
+//Upload file
 
-
- 
-// View Engine Setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
- 
-var upload = multer({ dest: "/var/www/html/upload/file" })
-// If you do not want to use diskStorage then uncomment it
- 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         // Uploads is the Upload_folder_name
@@ -86,52 +86,47 @@ var storage = multer.diskStorage({
         cb(null, file.originalname);
     },
 });
- 
-// Define the maximum size for uploading
-// picture i.e. 1 MB. it is optional
-const maxSize = 1 * 1000 * 1000;
- 
-var upload = multer({
-    storage: storage,
-    limits: { fileSize: maxSize },
-    fileFilter: function (req, file, cb) {
-        // Set the filetypes, it is optional
-        var filetypes = /jpeg|jpg|png/;
-        var mimetype = filetypes.test(file.mimetype);
- 
-        var extname = filetypes.test(
-            path.extname(file.originalname).toLowerCase()
-        );
- 
-        if (mimetype && extname) {
-            return cb(null, true);
-        }
- 
-        cb(
-            "Error: File upload only supports the " +
-                "following filetypes - " +
-                filetypes
-        );
-    },
- 
-    // mypic is the name of file attribute
-}).single("mypic");
 
- 
-app.post("/uploadProfilePicture", function (req, res, next) {
-    // Error MiddleWare for multer file upload, so if any
-    // error occurs, the image would not be uploaded!
-    upload(req, res, function (err) {
-        if (err) {
-            // ERROR occurred (here it can be occurred due
-            // to uploading image of size greater than
-            // 1MB or uploading different file type)
-            res.send(err);
+const upload = multer({
+    storage: storage,
+    // Limit file size if needed
+    limits: { fileSize: 1024 * 1024 * 10 }, // 10 MB
+    // Filter files
+    fileFilter: function (req, file, cb) {
+        // Check file type
+        const allowedExtensions = ['.zip', '.pdf', '.ppt', '.pptx'];
+        const extname = path.extname(file.originalname).toLowerCase();
+        if (allowedExtensions.includes(extname)) {
+            cb(null, true);
         } else {
-            // SUCCESS, image successfully uploaded
-            res.send("Success, Image uploaded!");
+            cb(new Error('Invalid file extension!'), false);
         }
-    });
+    }
+});
+
+app.post('/upload', (req, res) => {
+    upload.fields([
+        { name: 'presentation', maxCount: 1 },
+        { name: 'exercise', maxCount: 1 }])(req, res, function (err) {
+            if (err) {
+                next(err);
+                return;
+            }
+
+            const presentationFile = req.files['presentation'] ? req.files['presentation'][0] : null;
+            const exerciseFile = req.files['exercise'] ? req.files['exercise'][0] : null;
+
+
+            if (presentationFile) console.log('PDF/PPT/PPTX file:', presentationFile.originalname);
+            if (exerciseFile) console.log('ZIP file:', exerciseFile.originalname);
+
+            console.log('Description:', req.body.description);
+            console.log('Title:', req.body.title);
+            console.log('Tutorial:', req.body.tutorial);
+            console.log('Token:', req.body.token);
+
+            res.send('Files uploaded successfully!');
+        });
 });
 
 

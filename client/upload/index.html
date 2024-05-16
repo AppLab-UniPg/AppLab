@@ -12,7 +12,7 @@
 <body>
     <div id="navbar"></div>
     <h1>Crea un nuovo tutorial</h1>
-    <form action="/upload" method="post" enctype="multipart/form-data">
+    <form action="http://localhost:3000/addtutorial" method="post" enctype="multipart/form-data">
         <label for="title">Title:</label>
         <input type="text" id="title" name="title" required><br><br>
         
@@ -23,7 +23,7 @@
     </form>
 
     <h1>Carica in un tutorial</h1>
-    <form action="/upload" method="post" enctype="multipart/form-data">
+    <form action="http://localhost:3000/upload" method="post" enctype="multipart/form-data">
         <label for="tutorial">Choose a tutorial:</label>
         <select id="tutorial" name="tutorial" required>
             <option value="tutorial1">Tutorial 1</option>
