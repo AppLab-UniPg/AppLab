@@ -75,6 +75,10 @@ app.post('/addtutorial', (req, res) => {
 
 app.post('/upload', (req, res) => {
 
+    if (!req.body.title || !req.body.description || !req.body.token || !req.body.tutorial) {
+        return res.status(400).send('Please provide all required fields and files');
+    }
+
     console.log('Title:', req.body.title);
     console.log('Description:', req.body.description);
     console.log('Token:', req.body.token);
