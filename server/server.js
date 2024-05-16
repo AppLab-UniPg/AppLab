@@ -123,7 +123,6 @@ app.post('/upload', (req, res) => {
             console.log('Description:', req.body.description);
             console.log('Title:', req.body.title);
             console.log('Tutorial:', req.body.tutorial);
-            console.log('Token:', req.body.token);
 
             res.send('Files uploaded successfully!');
         });
