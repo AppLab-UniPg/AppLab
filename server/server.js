@@ -79,7 +79,7 @@ app.post('/addtutorial', (req, res) => {
           <head>
             <script type="text/javascript">
               setTimeout(function() {
-                window.location.href = 'https://localhost/upload/';
+                window.location.href = 'http://localhost/upload/';
               }, 2000);
             </script>
           </head>
