@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const navbarContainer = document.getElementById("navbar");
 
   if (navbarContainer) {
-    fetch("/navbar.html")
+    fetch("../navbar.html")
       .then((response) => response.text())
       .then((html) => {
         navbarContainer.innerHTML = html;
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const navbarContainer = document.getElementById("footer");
 
   if (navbarContainer) {
-    fetch("/footer.html")
+    fetch("../footer.html")
       .then((response) => response.text())
       .then((html) => {
         navbarContainer.innerHTML = html;
