@@ -73,10 +73,27 @@ app.post('/addtutorial', (req, res) => {
 
     con.query("INSERT INTO `tutorial` (`Titolo`, `Descrizione`) VALUES (?,?)", [titolo, descrizione], function (err) {
         if (err) throw err;
-        return res.status(201).send('Caricato nel tutorial');
+        return res.status(201).send(`
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <script type="text/javascript">
+              setTimeout(function() {
+                window.location.href = 'https://localhost/upload/';
+              }, 2000);
+            </script>
+          </head>
+          <body>
+          <h2>Tutorial created successfully</h2>
+            <p>Redirecting in 2 seconds...</p>
+          </body>
+        </html>
+      `);
     });
 
     console.log('body:', req.body);
+
+
 });
 
 
