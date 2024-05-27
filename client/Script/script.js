@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
 })
 
 // Funzione per il menu a tendina
-function myFunction() {
+function hamburgerMenu() {
   var x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
     x.className += " responsive";
