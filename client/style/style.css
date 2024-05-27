@@ -110,34 +110,16 @@ footer a:hover {
 }
 
 /* Homepage */
-.news {
-  grid-area: news;
-  width: 35vw;
-  overflow: scroll;
-  max-height: 150vh;
-  border-radius: var(--radius);
-}
-
-.map {
-  grid-area: map;
-  width: 60vw;
-}
-
-.slideshow {
-  grid-area: slideshow;
-  width: 60vw;
-}
-
 .grid-container {
+  width: 100%;
+  min-height: 75vh;
   display: grid;
   grid-template-areas:
     'slideshow news'
     'map  news';
-  /*background-color: #2196F3;*/
-  max-width: 100%;
-  min-height: 75vh;
-  gap: 1vw;
-  padding: 2vw;
+  gap: 1.5vw;
+  justify-content: center;
+  padding: 1vw;
 }
 
 .grid-container>div {
@@ -157,7 +139,9 @@ h4 {
 
 /* Slideshow */
 .slideshow {
+  grid-area: slideshow;
   position: relative;
+  width: 60vw;
   height: auto;
 }
 
@@ -175,14 +159,19 @@ h4 {
 }
 
 .numbertext {
-  color: #f2f2f2;
-  font-size: 2vh;
-  padding: 8px 12px;
+  color: var(--color-white);
   position: absolute;
-  top: 0;
+  left: 0;
+  bottom: 0;
+  padding: .5em;
+  font-size: 1.5em;
 }
 
 /* Map */
+.map {
+  grid-area: map;
+  width: 60vw;
+}
 
 #map_dmi{
   width: 60vw;
@@ -191,15 +180,24 @@ h4 {
   border-radius: var(--radius);
 }
 
-/* Notizie*/
-.notizia{
+/* Notizie */
+.news {
+  grid-area: news;
   width: 35vw;
-  word-wrap: break-word;
+  overflow: scroll;
+  max-height: 150vh;
   border-radius: var(--radius);
-  font-size: 1.2em;
+}
+
+.notizia{
+  width: 96%;
   background-color: var(--color-white);
-  margin-top: 10px;
-  padding: 10px;
+  border-radius: var(--radius);
+  text-align: justify;
+  word-wrap: break-word;
+  font-size: 1.25em;
+  margin: 2%;
+  padding: 1em;
 }
 
 @media screen and (max-width: 1080px) {
@@ -210,41 +208,8 @@ h4 {
       'map';
   }
 
-  .news {
+  .slideshow, .mySlides, .mySlides img, .news, #map_dmi {
     width: 96vw;
-    min-height: 30vh;
-    max-height: none;
-    overflow: visible;
-  }
-  .notizia{
-    width: 96vw;
-    word-wrap: break-word;
-    border-radius: var(--radius);
-    margin-top: 10px;
-  }
-
-  .map {
-    grid-area: map;
-    width: 96vw;
-  }
-
-  .slideshow {
-    width: 96vw;
-  }
-
-  .mySlides {
-    max-width: 96vw;
-  }
-
-  .mySlides img {
-    width: 96vw;
-    max-width: 96vw;
-    border-radius: var(--radius);
-  }
-  #map_dmi{
-    width: 96vw;
-    height: 45vh;
-    border: none;
-    border-radius: var(--radius);
+    margin: 0;
   }
 }
