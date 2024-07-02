@@ -1,11 +1,10 @@
-let app = require('express')();
-let http = require('http').Server(app);
-let io = require('socket.io')(http);
-const bodyParser = require('body-parser');
-const fs = require('fs');
-const path = require('path');
-const multer = require("multer");
-let mysql = require('mysql');
+const express = require('express'); // Importa il framework Express.js
+let app = express(); // Crea un'applicazione Express
+const fs = require('fs'); // Modulo per la gestione dei file
+const path = require('path'); // Modulo per la gestione dei percorsi dei file
+const multer = require("multer"); // Modulo per la gestione dei file caricati
+let mysql = require('mysql'); // Modulo per la connessione al database MySQL
+const cors = require('cors'); // Middleware per gestire le richieste di risorse incrociate (CORS)
 let db = require('./db.js'); //dati database in un'altro file
 let con;
 
@@ -22,54 +21,21 @@ con.connect(function (err) {
     console.log("Connected to the database!");
 });
 
-io.sockets.on('connection', function (socket) { //quando un client si connette
-
-    socket.on('receive-tutorial', function () { //quando ricevo la richiesta di un tutorial invio i dati
-        con.connect(function (err) {
-            if (err) throw err;
-            con.query("SELECT * FROM tutorial", function (err, result, fields) {
-                if (err) throw err;
-                let tutorials = JSON.parse(JSON.stringify(result));
-                socket.emit('send-tutorial', { tutorials: tutorials });   //invio i dati al client
-                console.log(tutorials);
-            });
-        });
-    });
-
-    socket.on('receive-subtutorial', function (dati) { //quando ricevo la richiesta di un subtutorial invio i dati
-        con.connect(function (err) {
-            if (err) throw err;
-            con.query("SELECT * FROM subtutorial where tutorial=?", [dati.tutorial], function (err, result, fields) {
-                if (err) throw err;
-                let tutorials = JSON.parse(JSON.stringify(result));
-                socket.emit('send-subtutorial', { tutorials: tutorials });   //invio i dati al client
-                console.log(tutorials);
-            });
-        });
-    });
-
-    socket.on('receive-list-tutorial', function () { //quando ricevo la richiesta della lista dei tutorial invio i dati
-        con.connect(function (err) {
-            if (err) throw err;
-            con.query("SELECT Titolo FROM tutorial", function (err, result, fields) {
-                if (err) throw err;
-                let tutorials = JSON.parse(JSON.stringify(result));
-                socket.emit('send-list-tutorial', { tutorials: tutorials });
-                console.log(tutorials);
-            });
-        });
-    });
-
-});
 
 //Create new tutorial
 // for parsing multipart/form-data
+app.use(cors({
+    origin: 'http://localhost', // Origine del frontend che può accedere alle risorse del server
+    credentials: true, // Permette l'uso dei cookie dalle richieste frontend
+}));
 app.use(multer().any());
 
 app.post('/addtutorial', (req, res) => {
 
     let titolo = req.body.title;
     let descrizione = req.body.description;
+    
+    let PathImg = '/var/www/html/upload/file/';
 
     con.query("INSERT INTO `tutorial` (`Titolo`, `Descrizione`) VALUES (?,?)", [titolo, descrizione], function (err) {
         if (err) throw err;
@@ -90,10 +56,7 @@ app.post('/addtutorial', (req, res) => {
         </html>
       `);
     });
-
     console.log('body:', req.body);
-
-
 });
 
 
@@ -148,7 +111,70 @@ app.post('/upload', (req, res) => {
     res.send('Files uploaded successfully!');
 });
 
+app.get('/tutorial', (req, res) => {
+    // Query per selezionare tutti i dati dalla tabella tutorial
+    con.query("SELECT * FROM tutorial", function (err, result, fields) {
+        if (err) {
+            console.error('Errore nella query:', err);
+            return res.status(500).json({ error: 'Errore nella query' });
+        }
 
-http.listen(3000, function () {
+        // Creazione dell'array di oggetti nel formato richiesto
+        const tutorials = result.map(row => ({
+            Titolo: row.Titolo,
+            Descrizione: row.Descrizione,
+            Pathimg: row.Pathimg
+        }));
+
+        // Invio della risposta JSON con i dati ottenuti
+        res.json(tutorials);
+    });
+});
+
+app.get('/subtutorial', (req, res) => {
+    const titolo = req.query.titolo;
+    // Query per selezionare i dati dalla tabella subtutorial filtrati per il titolo
+    con.query("SELECT * FROM subtutorial WHERE tutorial = ?", [titolo], function (err, result, fields) {
+        if (err) {
+            console.error('Errore nella query:', err);
+            return res.status(500).json({ error: 'Errore nella query' });
+        }
+
+        // Creazione dell'array di oggetti nel formato richiesto
+        const subtutorials = result.map(row => ({
+            Titolo: row.Titolo,
+            Descrizione: row.Descrizione,
+            PathPresentazione: row.PathPresentazione,
+            PathEsercizi: row.PathEsercizi
+        }));
+
+        // Invio della risposta JSON con i dati ottenuti
+        res.json(subtutorials);
+    });
+});
+
+app.get('/list-tutorial', (req, res) => {
+    // Query per selezionare tutti i dati dalla tabella tutorial
+    con.query("SELECT Titolo FROM tutorial", function (err, result, fields) {
+        if (err) {
+            console.error('Errore nella query:', err);
+            return res.status(500).json({ error: 'Errore nella query' });
+        }
+
+        // Creazione dell'array di oggetti nel formato richiesto
+        const tutorials = result.map(row => ({
+            Titolo: row.Titolo,
+            Descrizione: row.Descrizione,
+            Pathimg: row.Pathimg
+        }));
+
+        // Invio della risposta JSON con i dati ottenuti
+        res.json(tutorials);
+    });
+});
+
+
+
+app.listen(3000, function () {
     console.log('listening on *:3000');
 });
