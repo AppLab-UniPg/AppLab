@@ -37,22 +37,18 @@ app.post('/addtutorial', (req, res) => {
     
     let PathImg = '/var/www/html/upload/file/';
 
-    con.query("INSERT INTO `tutorial` (`Titolo`, `Descrizione`) VALUES (?,?)", [titolo, descrizione], function (err) {
+    con.query("INSERT INTO `tutorial` (`Titolo`, `Descrizione`,`Pathimg`) VALUES (?,?,?)", [titolo, descrizione,PathImg], function (err) {
         if (err) throw err;
         return res.status(201).send(`
         <!DOCTYPE html>
         <html>
           <head>
             <script type="text/javascript">
-              setTimeout(function() {
-                window.location.href = 'http://localhost/upload/';
-              }, 2000);
+              alert('Tutorial creato');
+              window.location.href = 'http://localhost/tutorial/'; // Reindirizza alla pagina di tutorial
             </script>
           </head>
-          <body>
-          <h2>Tutorial created successfully</h2>
-            <p>Redirecting in 2 seconds...</p>
-          </body>
+          <body></body>
         </html>
       `);
     });
