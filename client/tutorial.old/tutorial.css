@@ -1,22 +1,10 @@
-:root {
-  --nav-height: 10vh;
-  --footer-height: 15vh;
-  --radius: 30px;
-  --shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.4);
-  --color-blu: #27348b;
-  --color-red: #C12235;
-  --color-gray: #293133;
-  --color-white: #fff;
-}
-
 /* GRID */
-#grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+.grid {
+  display: grid;
   width: 90%;
-  margin: 5vh auto;
-  min-height: calc(90vh - var(--nav-height) - var(--footer-height));
+  margin: 10vh auto;
+  min-height: 55vh;
+  grid-template-columns: repeat(4, auto);
 }
 /* ---------------- */
 
@@ -25,7 +13,7 @@
   width: 346px;
   height: 28em;
   position: relative;
-  margin: 2em;
+  margin: auto auto;
   border: 3px solid black;
   border-radius: 30px;
   box-shadow: 10px 10px 10px gray;

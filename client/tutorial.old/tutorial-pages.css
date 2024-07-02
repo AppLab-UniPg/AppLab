@@ -1,5 +1,5 @@
 /* GRID */
-#list {
+.list {
   display: grid;
   width: 100vw;
   margin: 10vh auto;
