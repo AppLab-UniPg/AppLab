@@ -34,10 +34,27 @@ app.post('/addtutorial', (req, res) => {
 
     let titolo = req.body.title;
     let descrizione = req.body.description;
-    
-    let PathImg = '/var/www/html/upload/file/';
 
-    con.query("INSERT INTO `tutorial` (`Titolo`, `Descrizione`,`Pathimg`) VALUES (?,?,?)", [titolo, descrizione,PathImg], function (err) {
+    let PathImg = '/var/www/html/PathEsercizi/file/';
+
+    // Save each file to a specified directory
+    req.files.forEach(file => {
+        const destinationDir = '/var/www/html/tutorial/file'; // Specify your destination directory here
+        const filePath = path.join(destinationDir, file.originalname);
+        if (file.fieldname == 'immagine') {
+            PathImg = '/var/www/html/tutorial/file/' + file.originalname;
+        }
+        // Save the file
+        fs.writeFile(filePath, file.buffer, (err) => {
+            if (err) {
+                console.error('Error saving file:', err);
+            } else {
+                console.log('File saved successfully:', file.originalname);
+            }
+        });
+    });
+
+    con.query("INSERT INTO `tutorial` (`Titolo`, `Descrizione`,`Pathimg`) VALUES (?,?,?)", [titolo, descrizione, PathImg], function (err) {
         if (err) throw err;
         return res.status(201).send(`
         <!DOCTYPE html>
@@ -68,8 +85,8 @@ app.post('/upload', (req, res) => {
     let descrizione = req.body.description;
     let tutorial = req.body.tutorial;
     let token = req.body.token;
-    let PathPresentazione = '/var/www/html/upload/file/';
-    let PathEsercizi = '/var/www/html/upload/file/';;
+    let PathPresentazione = '/var/www/html/tutorial/file/';
+    let PathEsercizi = '/var/www/html/tutorial/file/';;
 
     console.log('Title:', req.body.title);
     console.log('Description:', req.body.description);
@@ -81,13 +98,13 @@ app.post('/upload', (req, res) => {
 
     // Save each file to a specified directory
     req.files.forEach(file => {
-        const destinationDir = '/var/www/html/upload/file'; // Specify your destination directory here
+        const destinationDir = '/var/www/html/tutorial/file'; // Specify your destination directory here
         const filePath = path.join(destinationDir, file.originalname);
         if (file.fieldname == 'presentation') {
-            PathPresentazione = '/var/www/html/upload/file/' + file.originalname;
+            PathPresentazione = '/var/www/html/tutorial/file/' + file.originalname;
         }
         if (file.fieldname == 'exercise') {
-            PathPresentazione = '/var/www/html/upload/file/' + file.originalname;
+            PathEsercizi = '/var/www/html/tutorial/file/' + file.originalname;
         }
         // Save the file
         fs.writeFile(filePath, file.buffer, (err) => {
@@ -101,7 +118,18 @@ app.post('/upload', (req, res) => {
 
     con.query("INSERT INTO `subtutorial` (`Titolo`, `Descrizione`, `PathPresentazione`, `PathEsercizi`, `tutorial`) VALUES (?,?,?,?,?)", [titolo, descrizione, PathPresentazione, PathEsercizi, tutorial], function (err) {
         if (err) throw err;
-        return res.status(201).send('Caricato nel tutorial');
+        return res.status(201).send(`
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <script type="text/javascript">
+              alert('Caricato nel tutorial');
+              window.location.href = 'http://localhost/tutorial/'; // Reindirizza alla pagina di tutorial
+            </script>
+          </head>
+          <body></body>
+        </html>
+      `);
     });
 
     res.send('Files uploaded successfully!');

@@ -20,6 +20,8 @@
             <form action="http://localhost:3000/addtutorial" method="post" enctype="multipart/form-data">
                 <input class="upload-input" type="text" id="title" name="title" placeholder="Titolo"><br><br>
                 <textarea id="description" name="description" placeholder="Descrizione"></textarea><br><br>
+                <label for="presentation">Immagine:</label>
+                <input class="upload-input" type="file" id="immagine" name="immagine" accept=".webp" ><br><br>
                 <input class="upload-input" type="password" id="token" name="token" placeholder="Parola Magica"><br><br>
                 <input type="submit" value="Create" class="upload-invia" />
             </form>
