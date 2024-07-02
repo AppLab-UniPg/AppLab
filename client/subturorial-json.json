@@ -1,29 +1,26 @@
-{
-    "subtutorial": [
-      {
+[
+    {
         "Titolo": "Introduzione alle Variabili in Python",
         "Descrizione": "Impara a lavorare con le variabili in Python.",
         "PathPresentazione": "path/to/presentation1.pdf",
         "PathEsercizi": "path/to/exercises1.zip"
-      },
-      {
+    },
+    {
         "Titolo": "Manipolazione di Stringhe in Python",
         "Descrizione": "Tecniche per manipolare le stringhe in Python.",
         "PathPresentazione": "path/to/presentation2.pdf",
         "PathEsercizi": "path/to/exercises2.zip"
-      },
-      {
+    },
+    {
         "Titolo": "Query di Base in SQL",
         "Descrizione": "Esegui query di base in SQL.",
         "PathPresentazione": "path/to/presentation3.pdf",
         "PathEsercizi": "path/to/exercises3.zip"
-      },
-      {
+    },
+    {
         "Titolo": "Creare Tabelle in SQL",
         "Descrizione": "Impara a creare tabelle in SQL.",
         "PathPresentazione": "path/to/presentation4.pdf",
         "PathEsercizi": "path/to/exercises4.zip"
-      }
-    ]
-  }
-  
+    }
+]
