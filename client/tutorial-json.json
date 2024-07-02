@@ -1,0 +1,20 @@
+{
+    "tutorial": [
+      {
+        "Titolo": "Introduzione a Python",
+        "Descrizione": "Un tutorial completo per principianti su Python.",
+        "Pathimg": "path/to/image1.jpg"
+      },
+      {
+        "Titolo": "Guida a SQL",
+        "Descrizione": "Impara SQL con esempi pratici.",
+        "Pathimg": "path/to/image2.jpg"
+      },
+      {
+        "Titolo": "Sviluppo Web con HTML e CSS",
+        "Descrizione": "Crea il tuo primo sito web con HTML e CSS.",
+        "Pathimg": "path/to/image3.jpg"
+      }
+    ]
+  }
+  
