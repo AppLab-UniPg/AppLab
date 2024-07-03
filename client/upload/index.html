@@ -18,11 +18,11 @@
         <div class="upload-form">
             <h1 class="upload-titolo">Crea un nuovo tutorial</h1>
             <form action="http://localhost:3000/addtutorial" method="post" enctype="multipart/form-data">
-                <input class="upload-input" type="text" id="title" name="title" placeholder="Titolo"><br><br>
-                <textarea id="description" name="description" placeholder="Descrizione"></textarea><br><br>
+                <input class="upload-input" type="text" id="title" name="title" placeholder="Titolo" required><br><br>
+                <textarea id="description" name="description" placeholder="Descrizione" required></textarea><br><br>
                 <label for="presentation">Immagine:</label>
-                <input class="upload-input" type="file" id="immagine" name="immagine" accept=".webp" ><br><br>
-                <input class="upload-input" type="password" id="token" name="token" placeholder="Parola Magica"><br><br>
+                <input class="upload-input" type="file" id="immagine" name="immagine" accept=".webp" required><br><br>
+                <input class="upload-input" type="password" id="token" name="token" placeholder="Parola Magica" required><br><br>
                 <input type="submit" value="Create" class="upload-invia" />
             </form>
         </div>
@@ -41,12 +41,12 @@
                 <textarea id="description" name="description" placeholder="Descrizione" required></textarea><br><br>
         
                 <label for="presentation">Presentation:</label>
-                <input class="upload-input" type="file" id="presentation" name="presentation" accept=".ppt, .pptx, .pdf" ><br><br>
+                <input class="upload-input" type="file" id="presentation" name="presentation" accept=".ppt, .pptx, .pdf" required><br><br>
                 
                 <label for="exercise">Exercise:</label>
-                <input class="upload-input" type="file" id="exercise" name="exercise" accept=".zip"><br><br>
+                <input class="upload-input" type="file" id="exercise" name="exercise" accept=".zip" required><br><br>
                 
-                <input class="upload-input" type="password" id="token" name="token" placeholder="Parola Magica"><br><br>
+                <input class="upload-input" type="password" id="token" name="token" placeholder="Parola Magica" required><br><br>
                 
                 <input type="submit" value="Upload"  class="upload-invia" />
             </form>
