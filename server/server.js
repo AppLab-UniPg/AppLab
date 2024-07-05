@@ -41,7 +41,7 @@ app.post('/addtutorial', (req, res) => {
     let descrizione = req.body.description;
     let token = req.body.token;
 
-    let PathImg = '/tutorial/tutorial-imgs/';
+    let PathImg = '/assets/tutorials/imgs/';
 
     //Check token
 
@@ -57,7 +57,7 @@ app.post('/addtutorial', (req, res) => {
               <head>
                 <script type="text/javascript">
                   alert('Errore nella query');
-                  window.location.href = 'http://localhost/upload/'; // Reindirizza alla pagina di upload
+                  window.location.href = 'http://localhost/upload.html'; // Reindirizza alla pagina di upload
                 </script>
               </head>
               <body></body>
@@ -71,7 +71,7 @@ app.post('/addtutorial', (req, res) => {
               <head>
                 <script type="text/javascript">
                   alert('Token non valido');
-                  window.location.href = 'http://localhost/upload/'; // Reindirizza alla pagina di upload
+                  window.location.href = 'http://localhost/upload.html'; // Reindirizza alla pagina di upload
                 </script>
               </head>
               <body></body>
@@ -81,7 +81,7 @@ app.post('/addtutorial', (req, res) => {
         // Save each file to a specified directory
         req.files.forEach(file => {
             const formattedTitolo = formatString(titolo);
-            const destinationDir = '/var/www/html/tutorial/tutorial-imgs/'; // Specifica la tua directory di destinazione qui
+            const destinationDir = '/var/www/html/assets/tutorials/imgs/'; // Specifica la tua directory di destinazione qui
             const newFileName = `${formattedTitolo}${path.extname(file.originalname)}`;
             console.log('newFileName:', newFileName);
             const filePath = path.join(destinationDir, newFileName);
@@ -107,7 +107,7 @@ app.post('/addtutorial', (req, res) => {
           <head>
             <script type="text/javascript">
               alert('Tutorial creato');
-              window.location.href = 'http://localhost/tutorial/'; // Reindirizza alla pagina di tutorial
+              window.location.href = 'http://localhost/tutorial.html'; // Reindirizza alla pagina di tutorial
             </script>
           </head>
           <body></body>
@@ -132,8 +132,8 @@ app.post('/upload', (req, res) => {
     let descrizione = req.body.description;
     let tutorial = req.body.tutorial;
     let token = req.body.token;
-    let PathPresentazione = '/tutorial/file/';
-    let PathEsercizi = '/tutorial/file/';
+    let PathPresentazione = '/assets/tutorials/files/';
+    let PathEsercizi = '/assets/tutorials/files/';
 
     console.log('Title:', req.body.title);
     console.log('Description:', req.body.description);
@@ -154,7 +154,7 @@ app.post('/upload', (req, res) => {
               <head>
                 <script type="text/javascript">
                   alert('Errore nella query');
-                  window.location.href = 'http://localhost/upload/'; // Reindirizza alla pagina di upload
+                  window.location.href = 'http://localhost/upload.html'; // Reindirizza alla pagina di upload
                 </script>
               </head>
               <body></body>
@@ -168,7 +168,7 @@ app.post('/upload', (req, res) => {
               <head>
                 <script type="text/javascript">
                   alert('Token non valido');
-                  window.location.href = 'http://localhost/upload/'; // Reindirizza alla pagina di upload
+                  window.location.href = 'http://localhost/upload.html'; // Reindirizza alla pagina di upload
                 </script>
               </head>
               <body></body>
@@ -180,7 +180,7 @@ app.post('/upload', (req, res) => {
         req.files.forEach(file => {
             const formattedTutorial = formatString(tutorial);
             const formattedTitolo = formatString(titolo);
-            const destinationDir = '/var/www/html/tutorial/file'; // Specifica la tua directory di destinazione qui
+            const destinationDir = '/var/www/html/assets/tutorials/files'; // Specifica la tua directory di destinazione qui
             const newFileName = `${formattedTutorial}${formattedTitolo}${path.extname(file.originalname)}`;
             console.log('newFileName:', newFileName);
             const filePath = path.join(destinationDir, newFileName);
@@ -209,7 +209,7 @@ app.post('/upload', (req, res) => {
           <head>
             <script type="text/javascript">
               alert('Caricato nel tutorial');
-              window.location.href = 'http://localhost/tutorial/'; // Reindirizza alla pagina di tutorial
+              window.location.href = 'http://localhost/tutorial.html'; // Reindirizza alla pagina di tutorial
             </script>
           </head>
           <body></body>

@@ -1,16 +1,5 @@
-:root {
-  --nav-height: 10vh;
-  --footer-height: 15vh;
-  --radius: 30px;
-  --shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.4);
-  --color-blu: #27348b;
-  --color-red: #C12235;
-  --color-gray: #293133;
-  --color-white: #fff;
-}
-
 /* GRID */
-#grid {
+#boh {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

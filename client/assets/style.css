@@ -1,0 +1,471 @@
+/*------------------------------------GENERAL------------------------------------*/
+:root {
+  --nav-height: 10vh;
+  --nav-margin: 2vh;
+  --footer-height: 15vh;
+  --body-height: calc(90vh - var(--nav-margin) - var(--nav-height) - var(--footer-height));
+  --radius: 30px;
+  --shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.4);
+  --color-primary: #27348b;
+  --color-secondary: #e6e6fa;
+  --color-red: #C12235;
+  --color-gray: #293133;
+  --color-white: #fff;
+}
+
+body {
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/*------------------------------------NAVBAR------------------------------------*/
+.topnav {
+  height: var(--nav-height);
+  background-color: var(--color-primary);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin: var(--nav-margin);
+  z-index: 1;
+  overflow: hidden;
+}
+
+.logo {
+  display: inline;
+  height: calc(var(--nav-height) - 1vh);
+  margin: .5vh 1vh;
+}
+
+.nav-links {
+  float: right;
+}
+
+.nav-links a, .hamburger {
+  height: 2em;
+  display: inline-block;
+  color: var(--color-white);
+  text-align: center;
+  vertical-align: middle;
+  align-content: center;
+  margin-top: calc((var(--nav-height) - 2em)/2); /*2em equivale all'altezza*/
+  margin-right: 1em;
+  padding: 0 1em;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-size: 1.5em;
+  transition: background-color .3s, color .3s;
+}
+
+.nav-links a:hover {
+  background-color: var(--color-secondary);
+  color: var(--color-gray);
+}
+
+.topnav .hamburger {
+  display: none;
+}
+
+@media screen and (max-width: 1080px) {
+  .nav-links {
+    display: none;
+    float: none;
+  }
+
+  .topnav .hamburger {
+    display: block;
+    float: right;
+  }
+
+  .topnav.responsive {
+    height: 100%;
+  }
+
+  .topnav.responsive .nav-links {
+    display: block;
+  }
+
+  .topnav.responsive .nav-links a {
+    width: 100%;
+  }
+}
+
+/*------------------------------------FOOTER------------------------------------*/
+footer {
+  height: var(--footer-height);
+  width: 100vw;
+  max-width: 100%;
+  position: absolute;
+  color: var(--color-white);
+  background-color: var(--color-gray);
+  text-align: center;
+}
+
+footer a {
+  max-height: var(--footer-height);
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: var(--color-secondary);
+}
+
+/*------------------------------------INDEX EXCLUSIVES------------------------------------*/
+/* Homepage */
+.grid-container {
+  width: 100%;
+  min-height: 75vh;
+  display: grid;
+  grid-template-areas:
+    'slideshow news'
+    'map  news';
+  gap: 1.5vw;
+  justify-content: center;
+  padding: 1vw;
+}
+
+.grid-container > div {
+  background-color: var(--color-secondary);
+  border-radius: var(--radius);
+}
+
+.index-section {
+  padding: 0;
+  margin: 1em;
+}
+
+/* Slideshow */
+.slideshow {
+  grid-area: slideshow;
+  position: relative;
+  width: 60vw;
+  height: auto;
+}
+
+.mySlides {
+  display: none;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: var(--radius);
+  max-width: 60vw;
+}
+
+.mySlides img {
+  width: 60vw;
+  border-radius: var(--radius);
+}
+
+.numbertext {
+  color: var(--color-white);
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: .5em;
+  font-size: 1.5em;
+}
+
+/* Map */
+.map {
+  grid-area: map;
+  width: 60vw;
+}
+
+#map_dmi {
+  width: 60vw;
+  height: 100%;
+  border: none;
+  border-radius: var(--radius);
+}
+
+/* Notizie */
+.news {
+  grid-area: news;
+  width: 35vw;
+  overflow: scroll;
+  max-height: 150vh;
+  border-radius: var(--radius);
+}
+
+.notizia {
+  width: 96%;
+  background-color: var(--color-white);
+  border-radius: var(--radius);
+  text-align: justify;
+  word-wrap: break-word;
+  font-size: 1.25em;
+  margin: 2%;
+  padding: 1em;
+}
+
+.news_title {
+  padding: 0;
+  margin: 0 0 .5em 0;
+}
+
+@media screen and (max-width: 1080px) {
+  .grid-container {
+    grid-template-areas:
+      'news'
+      'slideshow'
+      'map';
+  }
+
+  .slideshow, .mySlides, .mySlides img, .news, #map_dmi {
+    width: 96vw;
+    margin: 0;
+  }
+}
+
+/*------------------------------------FLEXBOX (Universal)------------------------------------*/
+#flexbox {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+  margin: 5vh 0;
+  min-height: var(--body-height);
+}
+
+/*------------------------------------CHI SIAMO------------------------------------*/
+.aboutus-member {
+  background-color: var(--color-primary);
+  box-shadow: var(--shadow);
+  width: 18em;
+  margin: 3em;
+  text-align: center;
+  border-radius: 30px;
+}
+
+.aboutus-img {
+  width: inherit;
+  border-radius: 30px;
+}
+
+.aboutus-nome {
+  color: var(--color-white);
+  margin-bottom: 0;
+}
+
+.aboutus-tag {
+  color: var(--color-white);
+  font-size: 1.2em;
+  margin-top: 0;
+}
+
+.aboutus-ruolo {
+  color: var(--color-red);
+  font-size: 1.2em;
+}
+
+/*------------------------------------TUTORIAL/PORTFOLIO------------------------------------*/
+.flexbox-card {
+  min-width: 20rem;
+  width: min-content;
+  max-width: 25vw;
+  height: fit-content;
+  max-height: 50rem;
+  margin: 2em min(10em, 3vw);
+  border: 2px solid black;
+  border-radius: 30px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.horizontal { /* Se l'immagine della card è orizzontale il min-content fa l'immagine molto piccola, se qualcuno trova una soluzione migliore lo scriva */
+  width: auto;
+}
+
+.flexbox-card-info {
+  display: grid;
+  height: 35vh;
+  transition: all 0.3s;
+}
+.flexbox-card:hover .flexbox-card-info {
+  background-color: gray;
+}
+
+.flexbox-card-cover {
+  grid-area: 1 / 1;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: all 0.3s;
+}
+.flexbox-card:hover .flexbox-card-cover {
+  filter: blur(2px) brightness(50%);
+  transform: scale(1.2);
+
+}
+
+.flexbox-card-caption {
+  grid-area: 1 / 1;
+  z-index: 1;
+  font-size: 1.25em;
+  color: white;
+  margin: auto 2em;
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: opacity 0.3s, transform 0.5s;
+}
+.flexbox-card:hover .flexbox-card-caption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.flexbox-card-title {
+  position: relative;
+  font-size: 1.5em;
+  padding: .2em;
+  margin: 0;
+  z-index: 2;
+  background-color: white;
+  border-top: 2px solid black;
+  transition: all 0.5s;
+}
+.flexbox-card:hover .flexbox-card-title {
+  color: white;
+  background-color: #27348b;
+}
+
+/*------------------------------------SUBTUTORIAL------------------------------------*/
+.subtutorial-chapter {
+  width: 22em;
+  height: 12em;
+  margin: 5vh auto;
+  overflow: hidden;
+  border: 2px solid black;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.subtutorial-chapter:hover {
+  background-color: var(--color-secondary);
+}
+
+.subtutorial-chapter-titolo {
+  font-size: 1.5em;
+}
+
+.subtutorial-chapter-pulsanti {
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.3s, opacity 0.5s;
+}
+.subtutorial-chapter:hover .subtutorial-chapter-pulsanti {
+  max-height: 20vh;
+  opacity: 1;
+  transition: max-height 1s, opacity 1s;
+}
+
+.slides, .esercizi {
+  padding: .5em 1em;
+  display: inline-block;
+  font-size: 1.5em;
+  color: var(--color-black);
+  text-decoration: none;
+  border-radius: var(--radius);
+}
+.slides {
+  background-color: lightgreen;
+}
+.esercizi {
+  background-color: lightsalmon;
+}
+
+.esercizi:hover, .slides:hover {
+  cursor: pointer;
+}
+
+.subtutorial-chapter-didascalia {
+  margin: 0;
+  transition: opacity 0.1s;
+}
+.subtutorial-chapter:hover .subtutorial-chapter-didascalia {
+  opacity: 0;
+}
+
+/*------------------------------------UPLOAD------------------------------------*/
+.upload-form {
+  width: 40vw;
+  margin: 5vh;
+  padding: 2em;
+  background-color: var(--color-secondary);
+  border-radius: var(--radius);
+}
+
+.upload-titolo {
+  display: flex; /* Per allineare bene il titolo con il select nel secondo form */
+  justify-content: center;
+  font-size: 2.5em;
+}
+
+#select-tutorial {
+  font-size: .75em;
+  margin-left: .25em;
+  text-align: center;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius);
+}
+
+.upload-label {
+  display: inline-block;
+  cursor: pointer;
+  font-size: 1.25em;
+  padding: .5em;
+}
+
+.upload-button {
+  cursor: pointer;
+  font-size: 1em;
+}
+.upload-button::file-selector-button {
+  background-color: var(--color-white);
+  color: var(--color-black);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius);
+  cursor: pointer;
+  padding: .5em;
+}
+
+.upload-text, .upload-largetext, .upload-invia {
+  width: 100%;
+  padding: 1em;
+  margin: .5em 0;
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius);
+}
+
+.upload-text {
+  font-size: 1.25em;
+}
+
+.upload-largetext {
+  height: 10vh;
+  padding: 1em .5em;
+  font-size: 1.25em;
+  resize: vertical;
+}
+
+.upload-invia {
+  background-color: var(--color-primary);
+  color: white;
+  cursor: pointer;
+  font-size: 2em;
+  font-weight: 600;
+  padding: .75em;
+  transition: .3s ease;
+}
+.upload-invia:hover {
+  filter: brightness(150%);
+}
+
+@media screen and (max-width: 1080px) {
+  .upload-form {
+    width: 90vw;
+  }
+}

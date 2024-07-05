@@ -1,0 +1,55 @@
+.subtutorial-chapter {
+  width: 22em;
+  height: 12em;
+  margin: 5vh auto;
+  overflow: hidden;
+  border: 2px solid black;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.subtutorial-chapter:hover {
+  background-color: var(--color-secondary);
+}
+
+.subtutorial-chapter-titolo {
+  font-size: 1.5em;
+}
+
+.subtutorial-chapter-pulsanti {
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.3s, opacity 0.5s;
+}
+.subtutorial-chapter:hover .subtutorial-chapter-pulsanti {
+  max-height: 20vh;
+  opacity: 1;
+  transition: max-height 1s, opacity 1s;
+}
+
+.slides, .esercizi {
+  padding: .5em 1em;
+  display: inline-block;
+  font-size: 1.5em;
+  color: var(--color-black);
+  text-decoration: none;
+  border-radius: var(--radius);
+}
+.slides {
+  background-color: lightgreen;
+}
+.esercizi {
+  background-color: lightsalmon;
+}
+
+.esercizi:hover, .slides:hover {
+  cursor: pointer;
+}
+
+.subtutorial-chapter-didascalia {
+  margin: 0;
+  transition: opacity 0.1s;
+}
+.subtutorial-chapter:hover .subtutorial-chapter-didascalia {
+  opacity: 0;
+}
