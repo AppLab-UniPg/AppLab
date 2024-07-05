@@ -3,7 +3,7 @@
   --nav-height: 10vh;
   --nav-margin: 2vh;
   --footer-height: 15vh;
-  --body-height: calc(90vh - var(--nav-margin) - var(--nav-height) - var(--footer-height));
+  --body-height: calc(90vh - var(--nav-margin) - var(--nav-height) - var(--footer-height)); /* Calcolo strano per escludere header e footer */
   --radius: 30px;
   --shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.4);
   --color-primary: #27348b;
@@ -35,7 +35,7 @@ body {
 
 .logo {
   display: inline;
-  height: calc(var(--nav-height) - 1vh);
+  height: calc(var(--nav-height) - 1vh); /* 1vh equivale a 2 volte il margine sopra/sotto*/
   margin: .5vh 1vh;
 }
 
@@ -50,7 +50,7 @@ body {
   text-align: center;
   vertical-align: middle;
   align-content: center;
-  margin-top: calc((var(--nav-height) - 2em)/2); /*2em equivale all'altezza*/
+  margin-top: calc((var(--nav-height) - 2em)/2); /* Per farlo centrato, 2em equivale all'altezza */
   margin-right: 1em;
   padding: 0 1em;
   border-radius: var(--radius);
@@ -116,14 +116,14 @@ footer a:hover {
 /*------------------------------------INDEX EXCLUSIVES------------------------------------*/
 /* Homepage */
 .grid-container {
-  width: 100%;
-  min-height: 75vh;
+  width: 85vw;
   display: grid;
   grid-template-areas:
     'slideshow news'
     'map  news';
-  gap: 1.5vw;
-  justify-content: center;
+  grid-template-rows: auto 1fr;
+  margin: auto;
+  gap: 3vw;
   padding: 1vw;
 }
 
@@ -133,28 +133,23 @@ footer a:hover {
 }
 
 .index-section {
-  padding: 0;
-  margin: 1em;
+  margin-left: 1em;
 }
 
 /* Slideshow */
 .slideshow {
+  width: 50vw;
+  height: fit-content;
   grid-area: slideshow;
   position: relative;
-  width: 60vw;
-  height: auto;
 }
 
 .mySlides {
   display: none;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: var(--radius);
-  max-width: 60vw;
 }
 
 .mySlides img {
-  width: 60vw;
+  width: 100%;
   border-radius: var(--radius);
 }
 
@@ -170,12 +165,13 @@ footer a:hover {
 /* Map */
 .map {
   grid-area: map;
-  width: 60vw;
+  width: 50vw;
+  overflow-y: hidden;
 }
 
 #map_dmi {
-  width: 60vw;
-  height: 100%;
+  width: 100%;
+  height: 80%;
   border: none;
   border-radius: var(--radius);
 }
@@ -183,7 +179,7 @@ footer a:hover {
 /* Notizie */
 .news {
   grid-area: news;
-  width: 35vw;
+  width: 30vw;
   overflow: scroll;
   max-height: 150vh;
   border-radius: var(--radius);
