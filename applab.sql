@@ -42,13 +42,13 @@ CREATE TABLE `tutorial` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `tutorial` (`Titolo`, `Descrizione`, `Pathimg`) VALUES
-('Head First HTML5',	'Recentemente HTML con la versione 5 è passato da un semplice linguaggio di markup, a qualcosa di molto più complesso.\r\nOra tramite HTML5 puoi creare applicazioni Web con archiviazione online, disegno 2D, supporto offline, socket, thread e molto altro ancora.',	'/assets/tutorials/files/imgs/html5.webp');
+('Head First HTML5',	'Recentemente HTML con la versione 5 è passato da un semplice linguaggio di markup, a qualcosa di molto più complesso.\r\nOra tramite HTML5 puoi creare applicazioni Web con archiviazione online, disegno 2D, supporto offline, socket, thread e molto altro ancora.',	'/assets/tutorials/imgs/html5.webp');
 INSERT INTO `tutorial` (`Titolo`, `Descrizione`, `Pathimg`) VALUES
-('Head First Web Design',	'Il libro spiega come creare pagine web accattivanti, comunicare in modo efficace e facilitare la navigazione del sito.\r\nCiò è essenziale sia per un blog personale che per un sito web aziendale, andando oltre div e css.',	'/assets/tutorials/files/imgs/webdesign.webp');
+('Head First Web Design',	'Il libro spiega come creare pagine web accattivanti, comunicare in modo efficace e facilitare la navigazione del sito.\r\nCiò è essenziale sia per un blog personale che per un sito web aziendale, andando oltre div e css.',	'/assets/tutorials/imgs/webdesign.webp');
 INSERT INTO `tutorial` (`Titolo`, `Descrizione`, `Pathimg`) VALUES
-('Head First Mobile Web',	'Questo libro illustra come ottimizzare le pagine web per la navigazione su dispositivi mobili, utilizzando gli strumenti familiari come HTML, CSS e JS, adattandole a dispositivi di varie dimensioni.',	'/assets/tutorials/files/imgs/mobileweb.webp');
+('Head First Mobile Web',	'Questo libro illustra come ottimizzare le pagine web per la navigazione su dispositivi mobili, utilizzando gli strumenti familiari come HTML, CSS e JS, adattandole a dispositivi di varie dimensioni.',	'/assets/tutorials/imgs/mobileweb.webp');
 INSERT INTO `tutorial` (`Titolo`, `Descrizione`, `Pathimg`) VALUES
-('Head First JavaScript',	'Il libro copre le basi della programmazione, il funzionamento del browser nell\'esecuzione del codice e l\'utilizzo del Document Object Model per modificare le pagine web senza richiedere l\'interazione dell\'utente.',	'/assets/tutorials/files/imgs/javascript.webp');
+('Head First JavaScript',	'Il libro copre le basi della programmazione, il funzionamento del browser nell\'esecuzione del codice e l\'utilizzo del Document Object Model per modificare le pagine web senza richiedere l\'interazione dell\'utente.',	'/assets/tutorials/imgs/javascript.webp');
 
 
 -- 2024-07-02 13:05:23
