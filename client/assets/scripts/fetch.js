@@ -142,10 +142,10 @@ switch (document.title) {
             <h4 class="flexbox-card-title">${portfolio.Titolo}</h4>
             `;
 
-          // Imposta il contenuto HTML del tutorial
+          // Imposta il contenuto HTML del portfolio
           portfolioElement.innerHTML = portfolioHTML;
 
-          // Aggiungi il tutorial al contenitore
+          // Aggiungi il portfolio al contenitore
           container.appendChild(portfolioElement);
         });
       }
