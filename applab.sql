@@ -41,6 +41,21 @@ CREATE TABLE `tutorial` (
   PRIMARY KEY (`Titolo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+DROP TABLE IF EXISTS `portfolio`;
+CREATE TABLE `portfolio` (
+  `Titolo` varchar(255) NOT NULL,
+  `Descrizione` varchar(500) DEFAULT NULL,
+  `Url` varchar(255) DEFAULT NULL,
+  `Pathimg` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`Titolo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+
+INSERT INTO `portfolio` (`Titolo`, `Descrizione`, `Url`, `Pathimg`) VALUES
+('CONARG',	'Conarg is a tool based on Constraint Programming, that is able to solve various problems related to the (Weighted) Abstract Argumentation Frameworks (AFs). \r\ndi Dan Rusnac e Gianmarco Silieri',	'https://conarg.dmi.unipg.it/',	'/assets/imgs/portfolio/conarg.webp'),
+('FRANTOIO MONTICELLI',	'',	'https://frantoiomonticelli.dmi.unipg.it/',	'/assets/imgs/portfolio/frantoio.webp'),
+('KRABS',	'Il sito ha l obiettivo di raccogliere tutorial fatti dagli studenti riguardanti il design di pagine web. È inoltre presente un calendario per tenere traccia degli incontri tra gli studenti, e un form per contattare il gruppo. \r\ndi Ivan Mercanti, Francesco Moca e Francesco Paolucci',	'https://krabs.dmi.unipg.it/',	'/assets/imgs/portfolio/krabs.webp');
+
+
 INSERT INTO `tutorial` (`Titolo`, `Descrizione`, `Pathimg`) VALUES
 ('Head First HTML5',	'Recentemente HTML con la versione 5 è passato da un semplice linguaggio di markup, a qualcosa di molto più complesso.\r\nOra tramite HTML5 puoi creare applicazioni Web con archiviazione online, disegno 2D, supporto offline, socket, thread e molto altro ancora.',	'/assets/tutorials/imgs/html5.webp');
 INSERT INTO `tutorial` (`Titolo`, `Descrizione`, `Pathimg`) VALUES

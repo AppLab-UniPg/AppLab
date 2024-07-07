@@ -1,5 +1,5 @@
 // Verifica se ci troviamo sulla pagina dei tutorial
-switch(document.title) {
+switch (document.title) {
   case 'AppLab Tutorial Index':
     document.addEventListener('DOMContentLoaded', function () {
       // Fai una richiesta al server per ottenere i dati dei tutorial
@@ -28,7 +28,7 @@ switch(document.title) {
         listatutorial.forEach(tutorial => {
           const tutorialElement = document.createElement('div');
           tutorialElement.classList.add('flexbox-card');
-          tutorialElement.onclick = function() {
+          tutorialElement.onclick = function () {
             location.href = 'subtutorial.html?titolo=' + tutorial.Titolo;
           };
 
@@ -99,7 +99,59 @@ switch(document.title) {
       }
     });
     break;
-  
+
+  case 'AppLab Portfolio':
+    document.addEventListener('DOMContentLoaded', function () {
+      // Fai una richiesta al server per ottenere i dati dei tutorial
+      fetch('http://localhost:3000/portfolio')
+        .then(response => {
+          // Verifica se la risposta del server è ok
+          if (!response.ok) {
+            throw new Error('Errore durante il recupero dei dati dei tutorial');
+          }
+          // Parsa la risposta in formato JSON
+          return response.json();
+        })
+        .then(data => {
+          // Manipola i dati ottenuti e renderli nella pagina web
+          renderPortfolio(data);
+        })
+        .catch(error => {
+          // Gestisci eventuali errori
+          console.error('Si è verificato un errore:', error);
+        });
+
+      function renderPortfolio(listaportfolio) {
+        const container = document.getElementById('flexbox');
+
+        // Cicla attraverso i portfolio e crea un elemento per ciascuno
+        listaportfolio.forEach(portfolio => {
+          const portfolioElement = document.createElement('div');
+          portfolioElement.classList.add('flexbox-card');
+          portfolioElement.classList.add('horizontal');
+          portfolioElement.onclick = function () {
+            window.location.href = portfolio.Url;
+          };
+
+          // Costruisci il contenuto HTML del portfolio
+          const portfolioHTML = `
+            <div class="flexbox-card-info">
+              <img class="flexbox-card-cover" src="${portfolio.Pathimg}" alt="Cover Conarg">
+              <p class="flexbox-card-caption">${portfolio.Descrizione}</p>
+            </div>
+            <h4 class="flexbox-card-title">${portfolio.Titolo}</h4>
+            `;
+
+          // Imposta il contenuto HTML del tutorial
+          portfolioElement.innerHTML = portfolioHTML;
+
+          // Aggiungi il tutorial al contenitore
+          container.appendChild(portfolioElement);
+        });
+      }
+    });
+    break;
+
   case 'AppLab Upload':
     document.addEventListener('DOMContentLoaded', function () {
       // Fai una richiesta al server per ottenere i dati dei tutorial

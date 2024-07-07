@@ -116,7 +116,6 @@ app.post('/addtutorial', (req, res) => {
         });
     });
 
-
 });
 
 
@@ -219,6 +218,90 @@ app.post('/upload', (req, res) => {
     });
 });
 
+app.post('/addportfolio', (req, res) => {
+
+    let titolo = req.body.title;
+    let descrizione = req.body.description;
+    let url = req.body.url;
+    let token = req.body.token;
+
+    let PathImg = '/assets/imgs/portfolio/';
+
+    //Check token
+
+    token = createHash('sha256').update(token).digest('hex');
+    console.log('token:', token);
+
+    con.query("SELECT * FROM `secret-key` WHERE `secret` = ?", [token], function (err, result, fields) {
+        if (err) {
+            console.error('Errore nella query:', err);
+            return res.status(500).send(`
+            <!DOCTYPE html>
+            <html>
+              <head>
+                <script type="text/javascript">
+                  alert('Errore nella query');
+                  window.location.href = 'http://localhost/upload.html'; // Reindirizza alla pagina di upload
+                </script>
+              </head>
+              <body></body>
+            </html>
+          `);
+        }
+        if (result.length == 0) {
+            return res.status(401).send(`
+            <!DOCTYPE html>
+            <html>
+              <head>
+                <script type="text/javascript">
+                  alert('Token non valido');
+                  window.location.href = 'http://localhost/upload.html'; // Reindirizza alla pagina di upload
+                </script>
+              </head>
+              <body></body>
+            </html>
+          `);
+        }
+        // Save each file to a specified directory
+        req.files.forEach(file => {
+            const formattedTitolo = formatString(titolo);
+            const destinationDir = '/var/www/html/assets/imgs/portfolio/'; // Specifica la tua directory di destinazione qui
+            const newFileName = `${formattedTitolo}${path.extname(file.originalname)}`;
+            console.log('newFileName:', newFileName);
+            const filePath = path.join(destinationDir, newFileName);
+
+            if (file.fieldname == 'imgcover') {
+                PathImg = PathImg + newFileName;
+            }
+            // Save the file
+            fs.writeFile(filePath, file.buffer, (err) => {
+                if (err) {
+                    console.error('Error saving file:', err);
+                } else {
+                    console.log('File saved successfully');
+                }
+            });
+        });
+
+        con.query("INSERT INTO `portfolio` (`Titolo`, `Descrizione`,`Url`,`Pathimg`) VALUES (?,?,?,?)", [titolo.toUpperCase(), descrizione,url,PathImg], function (err) {
+            if (err) throw err;
+            return res.status(201).send(`
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <script type="text/javascript">
+              alert('Portfolio aggiunto');
+              window.location.href = 'http://localhost/portfolio.html'; // Reindirizza alla pagina di tutorial
+            </script>
+          </head>
+          <body></body>
+        </html>
+      `);
+        });
+    });
+
+});
+
 app.get('/tutorial', (req, res) => {
     // Query per selezionare tutti i dati dalla tabella tutorial
     con.query("SELECT * FROM tutorial", function (err, result, fields) {
@@ -259,6 +342,27 @@ app.get('/subtutorial', (req, res) => {
         // Invio della risposta JSON con i dati ottenuti
         res.json(subtutorials);
     });
+});
+
+app.get('/portfolio', (req, res) => {
+  // Query per selezionare i dati dalla tabella subtutorial filtrati per il titolo
+  con.query("SELECT * FROM portfolio", function (err, result, fields) {
+      if (err) {
+          console.error('Errore nella query:', err);
+          return res.status(500).json({ error: 'Errore nella query' });
+      }
+
+      // Creazione dell'array di oggetti nel formato richiesto
+      const portfolio = result.map(row => ({
+          Titolo: row.Titolo,
+          Descrizione: row.Descrizione,
+          Url: row.Url,
+          Pathimg: row.Pathimg
+      }));
+
+      // Invio della risposta JSON con i dati ottenuti
+      res.json(portfolio);
+  });
 });
 
 app.get('/list-tutorial', (req, res) => {
