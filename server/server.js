@@ -28,6 +28,22 @@ function formatString(str) {
   return str.replace(/\s+/g, '').toLowerCase();
 }
 
+function sendPage(url, message) {
+  let page;
+  return page = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <script type="text/javascript">
+          alert('${message}');
+          window.location.href = 'http://localhost/${url}'; // Reindirizza alla pagina di upload
+        </script>
+      </head>
+      <body></body>
+    </html>
+  `;
+}
+
 // for parsing multipart/form-data
 app.use(cors({
   origin: 'http://localhost', // Origine del frontend che può accedere alle risorse del server
@@ -40,7 +56,7 @@ app.post('/addtutorial', (req, res) => {
 
   // Verifica che tutti i campi e i file richiesti siano presenti
   if (!req.body.title || !req.body.description || !req.body.token || req.files.length === 0) {
-    return res.status(400).send('Please provide all required fields and files');
+    return res.status(400).send(sendPage('upload.html','Inserisci tutti i campi richiesti'));
   }
 
   let titolo = req.body.title;
@@ -57,32 +73,10 @@ app.post('/addtutorial', (req, res) => {
   con.query("SELECT * FROM `secret-key` WHERE `secret` = ?", [token], function (err, result, fields) {
     if (err) {
       console.error('Errore nella query:', err);
-      return res.status(500).send(`
-            <!DOCTYPE html>
-            <html>
-              <head>
-                <script type="text/javascript">
-                  alert('Errore nella query');
-                  window.location.href = 'http://localhost/upload.html'; // Reindirizza alla pagina di upload
-                </script>
-              </head>
-              <body></body>
-            </html>
-          `);
+      return res.status(500).send(sendPage('upload.html','Errore nella query'));
     }
     if (result.length == 0) {
-      return res.status(401).send(`
-            <!DOCTYPE html>
-            <html>
-              <head>
-                <script type="text/javascript">
-                  alert('Token non valido');
-                  window.location.href = 'http://localhost/upload.html'; // Reindirizza alla pagina di upload
-                </script>
-              </head>
-              <body></body>
-            </html>
-          `);
+      return res.status(401).send(sendPage('upload.html','Token non valido'));
     }
     // Save each file to a specified directory
     req.files.forEach(file => {
@@ -108,18 +102,7 @@ app.post('/addtutorial', (req, res) => {
     // Inserisci i dati del tutorial nel database
     con.query("INSERT INTO `tutorial` (`Titolo`, `Descrizione`,`Pathimg`) VALUES (?,?,?)", [titolo, descrizione, PathImg], function (err) {
       if (err) throw err;
-      return res.status(201).send(`
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <script type="text/javascript">
-              alert('Tutorial creato');
-              window.location.href = 'http://localhost/tutorial.html'; // Reindirizza alla pagina di tutorial
-            </script>
-          </head>
-          <body></body>
-        </html>
-      `);
+      return res.status(201).send(sendPage('tutorial.html','Tutorial creato'));
     });
   });
 
@@ -127,12 +110,11 @@ app.post('/addtutorial', (req, res) => {
 
 
 //Upload di un sottotutorial
-
 app.post('/upload', (req, res) => {
 
   // Verifica che tutti i campi e i file richiesti siano presenti
   if (!req.body.title || !req.body.description || !req.body.token || !req.body.tutorial || req.files.length === 1) {
-    return res.status(400).send('Please provide all required fields and files');
+    return res.status(400).send(sendPage('upload.html','Inserisci tutti i campi richiesti'));
   }
 
   let titolo = req.body.title;
@@ -155,32 +137,10 @@ app.post('/upload', (req, res) => {
   con.query("SELECT * FROM `secret-key` WHERE `secret` = ?", [token], function (err, result, fields) {
     if (err) {
       console.error('Errore nella query:', err);
-      return res.status(500).send(`
-            <!DOCTYPE html>
-            <html>
-              <head>
-                <script type="text/javascript">
-                  alert('Errore nella query');
-                  window.location.href = 'http://localhost/upload.html'; // Reindirizza alla pagina di upload
-                </script>
-              </head>
-              <body></body>
-            </html>
-          `);
+      return res.status(500).send(sendPage('upload.html','Errore nella query'));
     }
     if (result.length == 0) {
-      return res.status(401).send(`
-            <!DOCTYPE html>
-            <html>
-              <head>
-                <script type="text/javascript">
-                  alert('Token non valido');
-                  window.location.href = 'http://localhost/upload.html'; // Reindirizza alla pagina di upload
-                </script>
-              </head>
-              <body></body>
-            </html>
-          `);
+      return res.status(401).send(sendPage('upload.html','Token non valido'));
     }
 
     // Save each file to a specified directory
@@ -211,18 +171,7 @@ app.post('/upload', (req, res) => {
     // Inserisci i dati del sottotutorial nel database
     con.query("INSERT INTO `subtutorial` (`Titolo`, `Descrizione`, `PathPresentazione`, `PathEsercizi`, `tutorial`) VALUES (?,?,?,?,?)", [titolo, descrizione, PathPresentazione, PathEsercizi, tutorial], function (err) {
       if (err) throw err;
-      return res.status(201).send(`
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <script type="text/javascript">
-              alert('Caricato nel tutorial');
-              window.location.href = 'http://localhost/tutorial.html'; // Reindirizza alla pagina di tutorial
-            </script>
-          </head>
-          <body></body>
-        </html>
-      `);
+      return res.status(201).send(sendPage('tutorial.html','Caricato nel tutorial'));
     });
   });
 });
@@ -232,7 +181,7 @@ app.post('/addportfolio', (req, res) => {
 
   // Verifica che tutti i campi e i file richiesti siano presenti
   if (!req.body.title || !req.body.description || !req.body.token || !req.body.url || req.files.length === 0) {
-    return res.status(400).send('Please provide all required fields and files');
+    return res.status(400).send(sendPage('upload.html','Inserisci tutti i campi richiesti'));
   }
 
   let titolo = req.body.title;
@@ -249,32 +198,10 @@ app.post('/addportfolio', (req, res) => {
   con.query("SELECT * FROM `secret-key` WHERE `secret` = ?", [token], function (err, result, fields) {
     if (err) {
       console.error('Errore nella query:', err);
-      return res.status(500).send(`
-            <!DOCTYPE html>
-            <html>
-              <head>
-                <script type="text/javascript">
-                  alert('Errore nella query');
-                  window.location.href = 'http://localhost/upload.html'; // Reindirizza alla pagina di upload
-                </script>
-              </head>
-              <body></body>
-            </html>
-          `);
+      return res.status(500).send(sendPage('upload.html','Errore nella query'));
     }
     if (result.length == 0) {
-      return res.status(401).send(`
-            <!DOCTYPE html>
-            <html>
-              <head>
-                <script type="text/javascript">
-                  alert('Token non valido');
-                  window.location.href = 'http://localhost/upload.html'; // Reindirizza alla pagina di upload
-                </script>
-              </head>
-              <body></body>
-            </html>
-          `);
+      return res.status(401).send(sendPage('upload.html','Token non valido'));
     }
     // Save each file to a specified directory
     req.files.forEach(file => {
@@ -300,18 +227,7 @@ app.post('/addportfolio', (req, res) => {
     // Inserisci i dati del portfolio nel database
     con.query("INSERT INTO `portfolio` (`Titolo`, `Descrizione`,`Url`,`Pathimg`) VALUES (?,?,?,?)", [titolo.toUpperCase(), descrizione, url, PathImg], function (err) {
       if (err) throw err;
-      return res.status(201).send(`
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <script type="text/javascript">
-              alert('Portfolio aggiunto');
-              window.location.href = 'http://localhost/portfolio.html'; // Reindirizza alla pagina di tutorial
-            </script>
-          </head>
-          <body></body>
-        </html>
-      `);
+      return res.status(201).send(sendPage('portfolio.html','Portfolio aggiunto'));
     });
   });
 
