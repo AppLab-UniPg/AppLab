@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/assets/style/style.css">
     <script rel="script" src="/assets/scripts/general_scripts.js"></script>
     <script rel="script" src="/assets/scripts/fetch.js"></script>
+    <script rel="script" src="/assets/scripts/edit_list.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- google icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
@@ -14,7 +15,24 @@
   <body>
     <div id="navbar"></div>
 
-    <div id="flexbox"></div>
+    <div class="edit-switch-container">
+      <label class="switch">
+        <input type="checkbox" id="edit-switch" onchange="enableEditMode()">
+        <span class="slider round"></span>
+      </label>
+      <p class="edit-switch-label">Modalità</p>
+      <p class="edit-switch-label" id="edit-status">Lettura/Scrittura</p>
+    </div>
+
+    <div id="flexbox">      
+      <div class="flexbox-card horizontal" id="new-button">
+        <div class="flexbox-card-info">
+          <img class="flexbox-card-cover" src="/assets/imgs/nuovo.png">
+          <p class="flexbox-card-caption">Carica un nuovo sito nel portfolio</p>
+        </div>
+        <h4 class="flexbox-card-title">NUOVO</h4>
+      </div>
+    </div>
 
     <div id="footer"></div>
   </body>

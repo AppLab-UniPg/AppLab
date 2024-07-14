@@ -35,7 +35,7 @@ switch (document.title) {
           // Costruisci il contenuto HTML del tutorial
           const tutorialHTML = `
             <div class="flexbox-card-info">
-              <img class="flexbox-card-cover" src="${tutorial.Pathimg}">
+              <img class="flexbox-card-cover" src="${tutorial.Pathimg}" alt="${tutorial.Titolo}">
               <p class="flexbox-card-caption">${tutorial.Descrizione}</p>
             </div>
             <h4 class="flexbox-card-title">${tutorial.Titolo}</h4>
@@ -136,7 +136,7 @@ switch (document.title) {
           // Costruisci il contenuto HTML del portfolio
           const portfolioHTML = `
             <div class="flexbox-card-info">
-              <img class="flexbox-card-cover" src="${portfolio.Pathimg}" alt="Cover Conarg">
+              <img class="flexbox-card-cover" src="${portfolio.Pathimg}" alt="${portfolio.Titolo}">
               <p class="flexbox-card-caption">${portfolio.Descrizione}</p>
             </div>
             <h4 class="flexbox-card-title">${portfolio.Titolo}</h4>

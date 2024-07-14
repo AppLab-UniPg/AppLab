@@ -51,22 +51,9 @@ app.use(cors({
 }));
 app.use(multer().any());
 
-// Aggiungi un tutorial
-app.post('/addtutorial', (req, res) => {
-
-  // Verifica che tutti i campi e i file richiesti siano presenti
-  if (!req.body.title || !req.body.description || !req.body.token || req.files.length === 0) {
-    return res.status(400).send(sendPage('upload.html','Inserisci tutti i campi richiesti'));
-  }
-
-  let titolo = req.body.title;
-  let descrizione = req.body.description;
+// Token check
+app.post('/check-token', (req, res) => {
   let token = req.body.token;
-
-  let PathImg = '/assets/tutorials/imgs/';
-
-  //Check token
-
   token = createHash('sha256').update(token).digest('hex');
   console.log('token:', token);
 
@@ -78,31 +65,47 @@ app.post('/addtutorial', (req, res) => {
     if (result.length == 0) {
       return res.status(401).send(sendPage('upload.html','Token non valido'));
     }
-    // Save each file to a specified directory
-    req.files.forEach(file => {
-      const formattedTitolo = formatString(titolo);
-      const destinationDir = '/var/www/html/assets/tutorials/imgs/'; // Specifica la tua directory di destinazione qui
-      const newFileName = `${formattedTitolo}${path.extname(file.originalname)}`;
-      console.log('newFileName:', newFileName);
-      const filePath = path.join(destinationDir, newFileName);
+  });
+  return res.status(200).json({ message: 'OK' });
+});
 
-      if (file.fieldname == 'immagine') {
-        PathImg = PathImg + newFileName;
+// Aggiungi un tutorial
+app.post('/addtutorial', (req, res) => {
+
+  // Verifica che tutti i campi e i file richiesti siano presenti
+  if (!req.body.title || !req.body.description || req.files.length === 0) {
+    return res.status(400).send(sendPage('upload.html','Inserisci tutti i campi richiesti'));
+  }
+
+  let titolo = req.body.title;
+  let descrizione = req.body.description;
+
+  let PathImg = '/assets/tutorials/imgs/';
+
+  // Save each file to a specified directory
+  req.files.forEach(file => {
+    const formattedTitolo = formatString(titolo);
+    const destinationDir = '/var/www/html/assets/tutorials/imgs/'; // Specifica la tua directory di destinazione qui
+    const newFileName = `${formattedTitolo}${path.extname(file.originalname)}`;
+    console.log('newFileName:', newFileName);
+    const filePath = path.join(destinationDir, newFileName);
+
+    if (file.fieldname == 'immagine') {
+      PathImg = PathImg + newFileName;
+    }
+    // Save the file
+    fs.writeFile(filePath, file.buffer, (err) => {
+      if (err) {
+        console.error('Error saving file:', err);
+      } else {
+        console.log('File saved successfully');
       }
-      // Save the file
-      fs.writeFile(filePath, file.buffer, (err) => {
-        if (err) {
-          console.error('Error saving file:', err);
-        } else {
-          console.log('File saved successfully');
-        }
-      });
     });
 
     // Inserisci i dati del tutorial nel database
     con.query("INSERT INTO `tutorial` (`Titolo`, `Descrizione`,`Pathimg`) VALUES (?,?,?)", [titolo, descrizione, PathImg], function (err) {
       if (err) throw err;
-      return res.status(201).send(sendPage('tutorial.html','Tutorial creato'));
+      return res.status(201).send(sendPage('tutorial.html?editMode=true','Tutorial creato'));
     });
   });
 
