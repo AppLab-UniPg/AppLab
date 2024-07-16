@@ -1,3 +1,20 @@
+// Importazione del pulsante per la modifica della lista
+document.addEventListener("DOMContentLoaded", function () {
+  const navbarContainer = document.getElementById("edit-button");
+
+  if (navbarContainer) {
+    fetch("/assets/edit-button.html")
+      .then((response) => response.text())
+      .then((html) => {
+        navbarContainer.innerHTML = html;
+      })
+      .catch((error) => {
+        console.warn("Errore nel caricamento del pulsante:", error);
+      });
+  }
+})
+
+// Funzione per abilitare la modalità di modifica
 function enableEditMode() {
   let slider = document.getElementById('edit-switch');
   let tutorial = document.getElementById('new-button');
@@ -43,7 +60,11 @@ function enableEditMode() {
         }*/
     }
     //Aggiungere il parametro editMode=true all'url per mantenere la modalità di modifica anche dopo il refresh della pagina
-    window.history.pushState({}, '', '?editMode=true');
+    const params = new URLSearchParams(window.location.search);
+    params.set('editMode', true);
+    const newURL = `${window.location.origin}${window.location.pathname}?${params}`;
+    window.history.pushState({}, '', newURL);
+
     statusString.innerHTML = "Scrittura";
     tutorial.style.display = "block";    
   } else {
@@ -52,11 +73,11 @@ function enableEditMode() {
   }
 }
 
+// Aperura e chiusura del form
 function openUploadForm() {
     let form = document.getElementById('upload-form-container');
     form.style.display = "flex";
 }
-
 function closeUploadForm() {
     let form = document.getElementById('upload-form-container');
     form.style.display = "none";
