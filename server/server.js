@@ -108,7 +108,7 @@ app.post('/addtutorial', (req, res) => {
     // Inserisci i dati del tutorial nel database
     con.query("INSERT INTO `tutorial` (`Titolo`, `Descrizione`,`Pathimg`) VALUES (?,?,?)", [titolo, descrizione, PathImg], function (err) {
       if (err) throw err;
-      return res.status(201).send(sendPage('tutorial.html?editMode=true','Tutorial creato'));
+      return res.status(201).send(sendPage('tutorial.html','Tutorial creato'));
     });
   });
 
@@ -120,7 +120,7 @@ app.post('/addsubtutorial', (req, res) => {
 
   // Verifica che tutti i campi e i file richiesti siano presenti
   if (!req.body.title || !req.body.description || !req.body.tutorial || req.files.length === 1) {
-    return res.status(400).send(sendPage('tutorial.html','Inserisci tutti i campi richiesti'));
+    return res.status(400).send(sendPage(`subtutorial.html?titolo=${req.body.tutorial}`,'Inserisci tutti i campi richiesti'));
   }
 
   let titolo = req.body.title;
@@ -162,7 +162,7 @@ app.post('/addsubtutorial', (req, res) => {
   // Inserisci i dati del sottotutorial nel database
   con.query("INSERT INTO `subtutorial` (`Titolo`, `Descrizione`, `PathPresentazione`, `PathEsercizi`, `tutorial`) VALUES (?,?,?,?,?)", [titolo, descrizione, PathPresentazione, PathEsercizi, tutorial], function (err) {
     if (err) throw err;
-    return res.status(201).send(sendPage('tutorial.html','Caricato nel tutorial'));
+    return res.status(201).send(sendPage(`subtutorial.html?titolo=${req.body.tutorial}`,'Caricato nel tutorial'));
   });
 });
 
