@@ -4,6 +4,7 @@ const fs = require('fs'); // Modulo per la gestione dei file
 const path = require('path'); // Modulo per la gestione dei percorsi dei file
 const multer = require("multer"); // Modulo per la gestione dei file caricati
 let mysql = require('mysql'); // Modulo per la connessione al database MySQL
+const bodyParser = require('body-parser'); // Modulo per il parsing di dati in arrivo
 const cors = require('cors'); // Middleware per gestire le richieste di risorse incrociate (CORS)
 let db = require('./db.js'); //dati database in un'altro file
 const { createHash } = require('crypto'); // Modulo per la creazione di hash
@@ -50,23 +51,25 @@ app.use(cors({
   credentials: true, // Permette l'uso dei cookie dalle richieste frontend
 }));
 app.use(multer().any());
+// for parsing application/json
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Token check
 app.post('/check-token', (req, res) => {
-  let token = req.body.token;
+  let { token } = req.body;
   token = createHash('sha256').update(token).digest('hex');
-  console.log('token:', token);
 
   con.query("SELECT * FROM `secret-key` WHERE `secret` = ?", [token], function (err, result, fields) {
     if (err) {
       console.error('Errore nella query:', err);
-      return res.status(500).send(sendPage('upload.html','Errore nella query'));
+      return res.status(500).send({ message: 'Errore nella query' });
     }
     if (result.length == 0) {
-      return res.status(401).send(sendPage('upload.html','Token non valido'));
+      return res.status(401).send({ message: 'Token non valido' });
     }
+    return res.status(200).json({ message: 'OK' });
   });
-  return res.status(200).json({ message: 'OK' });
 });
 
 // Aggiungi un tutorial
