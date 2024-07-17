@@ -77,7 +77,7 @@ app.post('/addtutorial', (req, res) => {
 
   // Verifica che tutti i campi e i file richiesti siano presenti
   if (!req.body.title || !req.body.description || req.files.length === 0) {
-    return res.status(400).send(sendPage('upload.html','Inserisci tutti i campi richiesti'));
+    return res.status(400).send(sendPage('tutorial.html','Inserisci tutti i campi richiesti'));
   }
 
   let titolo = req.body.title;
@@ -116,69 +116,53 @@ app.post('/addtutorial', (req, res) => {
 
 
 //Upload di un sottotutorial
-app.post('/upload', (req, res) => {
+app.post('/addsubtutorial', (req, res) => {
 
   // Verifica che tutti i campi e i file richiesti siano presenti
-  if (!req.body.title || !req.body.description || !req.body.token || !req.body.tutorial || req.files.length === 1) {
-    return res.status(400).send(sendPage('upload.html','Inserisci tutti i campi richiesti'));
+  if (!req.body.title || !req.body.description || !req.body.tutorial || req.files.length === 1) {
+    return res.status(400).send(sendPage('tutorial.html','Inserisci tutti i campi richiesti'));
   }
 
   let titolo = req.body.title;
   let descrizione = req.body.description;
   let tutorial = req.body.tutorial;
-  let token = req.body.token;
   let PathPresentazione = '/assets/tutorials/files/';
   let PathEsercizi = '/assets/tutorials/files/';
 
   console.log('Title:', req.body.title);
   console.log('Description:', req.body.description);
-  console.log('Token:', req.body.token);
   console.log('Tutorial:', req.body.tutorial);
   console.log('Files:', req.files);
 
-  //Check token
-  token = createHash('sha256').update(token).digest('hex');
-  console.log('token:', token);
+  // Save each file to a specified directory
+  req.files.forEach(file => {
+    const formattedTutorial = formatString(tutorial);
+    const formattedTitolo = formatString(titolo);
+    const destinationDir = '/var/www/html/assets/tutorials/files'; // Specifica la tua directory di destinazione qui
+    const newFileName = `${formattedTutorial}${formattedTitolo}${path.extname(file.originalname)}`;
+    console.log('newFileName:', newFileName);
+    const filePath = path.join(destinationDir, newFileName);
 
-  con.query("SELECT * FROM `secret-key` WHERE `secret` = ?", [token], function (err, result, fields) {
-    if (err) {
-      console.error('Errore nella query:', err);
-      return res.status(500).send(sendPage('upload.html','Errore nella query'));
+    if (file.fieldname == 'presentation') {
+      PathPresentazione = PathPresentazione + newFileName;
     }
-    if (result.length == 0) {
-      return res.status(401).send(sendPage('upload.html','Token non valido'));
+    if (file.fieldname == 'exercise') {
+      PathEsercizi = PathEsercizi + newFileName;
     }
-
-    // Save each file to a specified directory
-    req.files.forEach(file => {
-      const formattedTutorial = formatString(tutorial);
-      const formattedTitolo = formatString(titolo);
-      const destinationDir = '/var/www/html/assets/tutorials/files'; // Specifica la tua directory di destinazione qui
-      const newFileName = `${formattedTutorial}${formattedTitolo}${path.extname(file.originalname)}`;
-      console.log('newFileName:', newFileName);
-      const filePath = path.join(destinationDir, newFileName);
-
-      if (file.fieldname == 'presentation') {
-        PathPresentazione = PathPresentazione + newFileName;
+    // Save the file
+    fs.writeFile(filePath, file.buffer, (err) => {
+      if (err) {
+        console.error('Error saving file:', err);
+      } else {
+        console.log('File saved successfully');
       }
-      if (file.fieldname == 'exercise') {
-        PathEsercizi = PathEsercizi + newFileName;
-      }
-      // Save the file
-      fs.writeFile(filePath, file.buffer, (err) => {
-        if (err) {
-          console.error('Error saving file:', err);
-        } else {
-          console.log('File saved successfully');
-        }
-      });
     });
+  });
 
-    // Inserisci i dati del sottotutorial nel database
-    con.query("INSERT INTO `subtutorial` (`Titolo`, `Descrizione`, `PathPresentazione`, `PathEsercizi`, `tutorial`) VALUES (?,?,?,?,?)", [titolo, descrizione, PathPresentazione, PathEsercizi, tutorial], function (err) {
-      if (err) throw err;
-      return res.status(201).send(sendPage('tutorial.html','Caricato nel tutorial'));
-    });
+  // Inserisci i dati del sottotutorial nel database
+  con.query("INSERT INTO `subtutorial` (`Titolo`, `Descrizione`, `PathPresentazione`, `PathEsercizi`, `tutorial`) VALUES (?,?,?,?,?)", [titolo, descrizione, PathPresentazione, PathEsercizi, tutorial], function (err) {
+    if (err) throw err;
+    return res.status(201).send(sendPage('tutorial.html','Caricato nel tutorial'));
   });
 });
 
@@ -186,48 +170,34 @@ app.post('/upload', (req, res) => {
 app.post('/addportfolio', (req, res) => {
 
   // Verifica che tutti i campi e i file richiesti siano presenti
-  if (!req.body.title || !req.body.description || !req.body.token || !req.body.url || req.files.length === 0) {
-    return res.status(400).send(sendPage('upload.html','Inserisci tutti i campi richiesti'));
+  if (!req.body.title || !req.body.description || !req.body.url || req.files.length === 0) {
+    return res.status(400).send(sendPage('portfolio.html','Inserisci tutti i campi richiesti'));
   }
 
   let titolo = req.body.title;
   let descrizione = req.body.description;
   let url = req.body.url;
-  let token = req.body.token;
 
   let PathImg = '/assets/imgs/portfolio/';
 
-  //Check token
-  token = createHash('sha256').update(token).digest('hex');
-  console.log('token:', token);
+  // Save each file to a specified directory
+  req.files.forEach(file => {
+    const formattedTitolo = formatString(titolo);
+    const destinationDir = '/var/www/html/assets/imgs/portfolio/'; // Specifica la tua directory di destinazione qui
+    const newFileName = `${formattedTitolo}${path.extname(file.originalname)}`;
+    console.log('newFileName:', newFileName);
+    const filePath = path.join(destinationDir, newFileName);
 
-  con.query("SELECT * FROM `secret-key` WHERE `secret` = ?", [token], function (err, result, fields) {
-    if (err) {
-      console.error('Errore nella query:', err);
-      return res.status(500).send(sendPage('upload.html','Errore nella query'));
+    if (file.fieldname == 'imgcover') {
+      PathImg = PathImg + newFileName;
     }
-    if (result.length == 0) {
-      return res.status(401).send(sendPage('upload.html','Token non valido'));
-    }
-    // Save each file to a specified directory
-    req.files.forEach(file => {
-      const formattedTitolo = formatString(titolo);
-      const destinationDir = '/var/www/html/assets/imgs/portfolio/'; // Specifica la tua directory di destinazione qui
-      const newFileName = `${formattedTitolo}${path.extname(file.originalname)}`;
-      console.log('newFileName:', newFileName);
-      const filePath = path.join(destinationDir, newFileName);
-
-      if (file.fieldname == 'imgcover') {
-        PathImg = PathImg + newFileName;
+    // Save the file
+    fs.writeFile(filePath, file.buffer, (err) => {
+      if (err) {
+        console.error('Error saving file:', err);
+      } else {
+        console.log('File saved successfully');
       }
-      // Save the file
-      fs.writeFile(filePath, file.buffer, (err) => {
-        if (err) {
-          console.error('Error saving file:', err);
-        } else {
-          console.log('File saved successfully');
-        }
-      });
     });
 
     // Inserisci i dati del portfolio nel database
@@ -236,7 +206,6 @@ app.post('/addportfolio', (req, res) => {
       return res.status(201).send(sendPage('portfolio.html','Portfolio aggiunto'));
     });
   });
-
 });
 
 app.get('/tutorial', (req, res) => {
@@ -301,28 +270,6 @@ app.get('/portfolio', (req, res) => {
     res.json(portfolio);
   });
 });
-
-app.get('/list-tutorial', (req, res) => {
-  // Query per selezionare tutti i dati dalla tabella tutorial
-  con.query("SELECT Titolo FROM tutorial", function (err, result, fields) {
-    if (err) {
-      console.error('Errore nella query:', err);
-      return res.status(500).json({ error: 'Errore nella query' });
-    }
-
-    // Creazione dell'array di oggetti nel formato richiesto
-    const tutorials = result.map(row => ({
-      Titolo: row.Titolo,
-      Descrizione: row.Descrizione,
-      Pathimg: row.Pathimg
-    }));
-
-    // Invio della risposta JSON con i dati ottenuti
-    res.json(tutorials);
-  });
-});
-
-
 
 app.listen(3000, function () {
   console.log('listening on *:3000');

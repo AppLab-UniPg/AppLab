@@ -34,16 +34,12 @@
         <form action="http://localhost:3000/addtutorial" method="post" enctype="multipart/form-data">
           <input required class="upload-text" type="text" id="title" name="title" placeholder="Titolo">
   
-          <textarea required class="upload-largetext" id="description" name="description" placeholder="Descrizione"
-            maxlength="250"></textarea>
+          <textarea required class="upload-largetext" id="description" name="description" placeholder="Descrizione" maxlength="250"></textarea>
   
           <label for="immagine" class="upload-label"> Immagine:
-            <input required class="upload-button" type="file" id="immagine" name="immagine"
-              accept=".jpg, .jpeg, .png, .webp">
+            <input required class="upload-button" type="file" id="immagine" name="immagine" accept="image/*">
           </label>
-  
-          <!--<input required class="upload-text" type="password" id="token" name="token" placeholder="Token">-->
-  
+    
           <input type="submit" value="Crea" class="upload-invia">
         </form>
       </div>

@@ -152,41 +152,6 @@ switch (document.title) {
     });
     break;
 
-  case 'AppLab Upload':
-    document.addEventListener('DOMContentLoaded', function () {
-      // Fai una richiesta al server per ottenere i dati dei tutorial
-      fetch('http://localhost:3000/list-tutorial')
-        .then(response => {
-          // Verifica se la risposta del server è ok
-          if (!response.ok) {
-            throw new Error('Errore durante il recupero dei dati dei subtutorial');
-          }
-          // Parsa la risposta in formato JSON
-          return response.json();
-        })
-        .then(data => {
-          // Manipola i dati ottenuti e renderli nella pagina web
-          listaTutorial(data);
-        })
-        .catch(error => {
-          // Gestisci eventuali errori
-          console.error('Si è verificato un errore:', error);
-        });
-
-      function listaTutorial(elencotutorial) {
-        const mySelect = document.getElementById('select-tutorial');
-
-        // Cicla attraverso i subtutorial e crea un elemento per ciascuno
-        elencotutorial.forEach(tutorial => {
-          const option = document.createElement('option');
-          option.value = tutorial.Titolo;
-          option.text = tutorial.Titolo;
-          mySelect.add(option);
-        });
-      }
-    });
-    break;
-
   default:
     console.error('Errore: titolo della pagina non riconosciuto');
     break;

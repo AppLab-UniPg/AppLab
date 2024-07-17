@@ -30,23 +30,18 @@
     <div id="upload-form-container">
       <div class="upload-form">
         <span class="upload-close" onclick="closeUploadForm()">&times;</span>
+        <h1 class="upload-titolo">Carica nel portfolio</h1>
         <form action="http://localhost:3000/addportfolio" method="post" enctype="multipart/form-data">
-          <h1 class="upload-titolo">Carica nel portfolio</h1>
-  
           <input required class="upload-text" type="text" id="title" name="title" placeholder="Titolo">
   
-          <textarea required class="upload-largetext" id="description" name="description"
-            placeholder="Descrizione"></textarea>
+          <textarea required class="upload-largetext" id="description" name="description" placeholder="Descrizione"></textarea>
   
-          <input required class="upload-text" type="url" id="url" name="url"
-            placeholder="URL"></textarea>
+          <input required class="upload-text" type="url" id="url" name="url" placeholder="URL">
   
           <label for="imgcover" class="upload-label">Immagine di copertina:
-            <input required class="upload-button" type="file" id="imgcover" name="imgcover" accept=".webp">
+            <input required class="upload-button" type="file" id="imgcover" name="imgcover" accept="image/*">
           </label>
-  
-          <!-- <input required class="upload-text" type="password" id="token" name="token" placeholder="Token"> -->
-  
+    
           <input type="submit" value="Carica" class="upload-invia">
         </form>
       </div>
