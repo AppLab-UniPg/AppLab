@@ -1,52 +1,64 @@
 <!DOCTYPE html>
 <html lang="it">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AppLab Portfolio</title>
-    <link rel="stylesheet" type="text/css" href="/assets/style/style.css">
-    <script rel="script" src="/assets/scripts/general-scripts.js"></script>
-    <script rel="script" src="/assets/scripts/fetch.js"></script>
-    <script rel="script" src="/assets/scripts/edit-list.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- google icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  </head>
 
-  <body>
-    <div id="navbar"></div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AppLab Portfolio</title>
+  <link rel="stylesheet" type="text/css" href="/assets/style/style.css">
+  <script rel="script" src="/assets/scripts/general-scripts.js"></script>
+  <script rel="script" src="/assets/scripts/fetch.js"></script>
+  <script rel="script" src="/assets/scripts/edit-list.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- google icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script>
+    function getToken() {
+      // Prendo il valore del token dal cookie
+      let token = getCookie("editMode");
+      document.getElementById('token').value = token;
+    }
+  </script>
+</head>
 
-    <div id="edit-button"></div>
+<body>
+  <div id="navbar"></div>
 
-    <div id="flexbox">      
-      <div class="flexbox-card horizontal" id="new-button" onclick="openUploadForm()">
-        <div class="flexbox-card-info">
-          <img class="flexbox-card-cover" src="/assets/imgs/nuovo.png">
-          <p class="flexbox-card-caption">Carica un nuovo sito nel portfolio</p>
-        </div>
-        <h4 class="flexbox-card-title">NUOVO</h4>
+  <div id="edit-button"></div>
+
+  <div id="flexbox">
+    <div class="flexbox-card horizontal" id="new-button" onclick="openUploadForm(); getToken()">
+      <div class="flexbox-card-info">
+        <img class="flexbox-card-cover" src="/assets/imgs/nuovo.png">
+        <p class="flexbox-card-caption">Carica un nuovo sito nel portfolio</p>
       </div>
+      <h4 class="flexbox-card-title">NUOVO</h4>
     </div>
+  </div>
 
-    <div id="upload-form-container">
-      <div class="upload-form">
-        <span class="upload-close" onclick="closeUploadForm()">&times;</span>
-        <h1 class="upload-titolo">Carica nel portfolio</h1>
-        <form action="http://localhost:3000/addportfolio" method="post" enctype="multipart/form-data">
-          <input required class="upload-text" type="text" id="title" name="title" placeholder="Titolo">
-  
-          <textarea required class="upload-largetext" id="description" name="description" placeholder="Descrizione"></textarea>
-  
-          <input required class="upload-text" type="url" id="url" name="url" placeholder="URL">
-  
-          <label for="imgcover" class="upload-label">Immagine di copertina:
-            <input required class="upload-button" type="file" id="imgcover" name="imgcover" accept="image/*">
-          </label>
-    
-          <input type="submit" value="Carica" class="upload-invia">
-        </form>
-      </div>
+  <div id="upload-form-container">
+    <div class="upload-form">
+      <span class="upload-close" onclick="closeUploadForm()">&times;</span>
+      <h1 class="upload-titolo">Carica nel portfolio</h1>
+      <form action="http://localhost:3000/addportfolio" method="post" enctype="multipart/form-data">
+        <input required class="upload-text" type="text" id="title" name="title" placeholder="Titolo">
+
+        <textarea required class="upload-largetext" id="description" name="description"
+          placeholder="Descrizione"></textarea>
+
+        <input required class="upload-text" type="url" id="url" name="url" placeholder="URL">
+
+        <label for="imgcover" class="upload-label">Immagine di copertina:
+          <input required class="upload-button" type="file" id="imgcover" name="imgcover" accept="image/*">
+        </label>
+
+        <input type="hidden" id="token" name="token">
+
+        <input type="submit" value="Carica" class="upload-invia">
+      </form>
     </div>
+  </div>
 
-    <div id="footer"></div>
-  </body>
+  <div id="footer"></div>
+</body>
+
 </html>

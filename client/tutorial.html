@@ -10,6 +10,14 @@
     <script rel="script" src="/assets/scripts/edit-list.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- google icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script>
+      function getToken() {
+        // Prendo il valore del token dal cookie
+        let token = getCookie("editMode");
+        document.getElementById('token').value = token;
+      }
+    </script>
   </head>
 
   <body>
@@ -18,7 +26,7 @@
     <div id="edit-button"></div>
 
     <div id="flexbox">
-      <div class="flexbox-card" id="new-button" onclick="openUploadForm()">
+      <div class="flexbox-card" id="new-button" onclick="openUploadForm(); getToken()">
         <div class="flexbox-card-info">
           <img class="flexbox-card-cover" src="/assets/imgs/nuovo.png">
           <p class="flexbox-card-caption">Carica un nuovo tutorial</p>
@@ -39,6 +47,7 @@
           <label for="immagine" class="upload-label"> Immagine:
             <input required class="upload-button" type="file" id="immagine" name="immagine" accept="image/*">
           </label>
+            <input type="hidden" id="token" name="token">
     
           <input type="submit" value="Crea" class="upload-invia">
         </form>

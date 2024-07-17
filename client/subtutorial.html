@@ -1,65 +1,76 @@
 <!DOCTYPE html>
 <html lang="it">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AppLab Tutorials</title>
-    <link rel="stylesheet" type="text/css" href="/assets/style/style.css">
-    <script rel="script" src="/assets/scripts/general-scripts.js"></script>
-    <script rel="script" src="/assets/scripts/fetch.js"></script>
-    <script rel="script" src="/assets/scripts/edit-list.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- google icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script>
-      function getTitle() {
-        // Prendo il valore del parametro "titolo" tramite URLSearchParams
-        const params = new URLSearchParams(window.location.search);
-        const titoloValore = params.get('titolo');
 
-        const titoloOggetto = document.getElementById('form-header');
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AppLab Tutorials</title>
+  <link rel="stylesheet" type="text/css" href="/assets/style/style.css">
+  <script rel="script" src="/assets/scripts/general-scripts.js"></script>
+  <script rel="script" src="/assets/scripts/fetch.js"></script>
+  <script rel="script" src="/assets/scripts/edit-list.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- google icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script>
+    function getTitle() {
+      // Prendo il valore del parametro "titolo" tramite URLSearchParams
+      const params = new URLSearchParams(window.location.search);
+      const titoloValore = params.get('titolo');
 
-        // Aggiungo il valore del parametro "titolo" al titolo del form e al campo nascosto "tutorial" del form
-        titoloOggetto.textContent = "Carica nel tutorial " + titoloValore;
-        document.getElementById('tutorial').value = titoloValore;
-      }
-    </script>
-  </head>
+      const titoloOggetto = document.getElementById('form-header');
 
-  <body>
-    <div id="navbar"></div>
-      
-    <div id="edit-button"></div>
+      // Aggiungo il valore del parametro "titolo" al titolo del form e al campo nascosto "tutorial" del form
+      titoloOggetto.textContent = "Carica nel tutorial " + titoloValore;
+      document.getElementById('tutorial').value = titoloValore;
+    }
+    function getToken() {
+      // Prendo il valore del token dal cookie
+      let token = getCookie("editMode");
+      document.getElementById('token').value = token;
+    }
+  </script>
+</head>
 
-    <div id="flexbox">
-      <div class="subtutorial-chapter" id="new-button" onclick="openUploadForm(); getTitle()">
-        <img style="height: inherit;" src="/assets/imgs/nuovo.png">
-      </div>
+<body>
+  <div id="navbar"></div>
+
+  <div id="edit-button"></div>
+
+  <div id="flexbox">
+    <div class="subtutorial-chapter" id="new-button" onclick="openUploadForm(); getTitle(); getToken()">
+      <img style="height: inherit;" src="/assets/imgs/nuovo.png">
     </div>
+  </div>
 
-    <div id="upload-form-container">
-      <div class="upload-form">
-        <span class="upload-close" onclick="closeUploadForm()">&times;</span>
-        <h1 class="upload-titolo" id="form-header"></h1>
-        <form action="http://localhost:3000/addsubtutorial" method="post" enctype="multipart/form-data">
-          <input type="hidden" id="tutorial" name="tutorial">
-          <input required class="upload-text" type="text" id="title" name="title" placeholder="Titolo">
-  
-          <textarea required class="upload-largetext"  id="description" name="description" placeholder="Descrizione"></textarea>
-  
-          <label for="presentation" class="upload-label">Presentazione:
-            <input required class="upload-button" type="file" id="presentation" name="presentation" accept=".ppt, .pptx, .pdf">
-          </label>
-  
-          <label class="upload-label">Esercizi:
-            <input required class="upload-button" type="file" id="exercise" name="exercise" accept=".zip">
-          </label>
-    
-          <input type="submit" value="Carica" class="upload-invia">
-        </form>
-      </div>
+  <div id="upload-form-container">
+    <div class="upload-form">
+      <span class="upload-close" onclick="closeUploadForm()">&times;</span>
+      <h1 class="upload-titolo" id="form-header"></h1>
+      <form action="http://localhost:3000/addsubtutorial" method="post" enctype="multipart/form-data">
+        <input type="hidden" id="tutorial" name="tutorial">
+        <input required class="upload-text" type="text" id="title" name="title" placeholder="Titolo">
+
+        <textarea required class="upload-largetext" id="description" name="description"
+          placeholder="Descrizione"></textarea>
+
+        <label for="presentation" class="upload-label">Presentazione:
+          <input required class="upload-button" type="file" id="presentation" name="presentation"
+            accept=".ppt, .pptx, .pdf">
+        </label>
+
+        <label class="upload-label">Esercizi:
+          <input required class="upload-button" type="file" id="exercise" name="exercise" accept=".zip">
+        </label>
+
+        <input type="hidden" id="token" name="token">
+
+        <input type="submit" value="Carica" class="upload-invia">
+      </form>
     </div>
+  </div>
 
 
-    <div id="footer"></div>
-  </body>
+  <div id="footer"></div>
+</body>
+
 </html>
